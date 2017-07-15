@@ -3,7 +3,12 @@ package com.hvt.english.ui.category;
 import android.view.View;
 
 import com.hvt.english.R;
+import com.hvt.english.model.Category;
 import com.hvt.english.ui.base.BaseFragment;
+import com.hvt.english.ui.base.OnClickItemListener;
+import com.hvt.english.ui.category.adapter.CategoryAdapter;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -12,16 +17,20 @@ import butterknife.Unbinder;
  * Created by Hado on 7/13/17.
  */
 
-public class CategoryFragment extends BaseFragment {
+public class CategoryFragment extends BaseFragment implements CategoryView, OnClickItemListener {
+
+    private CategoryPresenter presenter;
+
+    private CategoryAdapter adapter = new CategoryAdapter();
 
     @Override
     public void initView() {
-
+        adapter.setOnClickItemListener(this);
     }
 
     @Override
     public void initData() {
-
+        presenter.loadCategories();
     }
 
     @Override
@@ -32,5 +41,20 @@ public class CategoryFragment extends BaseFragment {
     @Override
     public Unbinder bindingView(View view) {
         return ButterKnife.bind(this, view);
+    }
+
+    @Override
+    public void onItemClicked(int position) {
+        presenter.prepareNavigateToCategoryDetail(position);
+    }
+
+    @Override
+    public void displayCategories(List<Category> categories) {
+        adapter.addData(categories);
+    }
+
+    @Override
+    public void navigateToDetailCategory(int categoryID) {
+
     }
 }
