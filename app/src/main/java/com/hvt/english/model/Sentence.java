@@ -5,4 +5,5 @@ package com.hvt.english.model;
  */
 
 public class Sentence {
+    
 }
