@@ -6,7 +6,7 @@ import com.hvt.english.network.ApiClient;
 
 import io.reactivex.disposables.CompositeDisposable;
 
-public abstract class BasePresenter<V extends BaseView> {
+public abstract class BasePresenter<V extends BaseView> implements IBasePresenter<V> {
 
     protected DataManager dataManager;
 
@@ -18,10 +18,12 @@ public abstract class BasePresenter<V extends BaseView> {
 
     private V baseView;
 
+    @Override
     public void onAttach(V view) {
         this.baseView = view;
     }
 
+    @Override
     public void onDetach() {
         compositeDisposable.clear();
         baseView = null;

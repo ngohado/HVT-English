@@ -1,30 +1,33 @@
 package com.hvt.english.ui.exam.listen;
 
-import com.hvt.english.model.Question;
+import android.os.Bundle;
+
+import com.hvt.english.model.Meaning;
 import com.hvt.english.network.ApiClient;
 import com.hvt.english.ui.base.BasePresenter;
+import com.hvt.english.ui.exam.main.ExamActivity;
 
 /**
  * Created by doannh on 7/18/17.
  */
 
-public class ListenExamPresenter extends BasePresenter<ListenExamView> {
+public class ListenExamPresenter extends BasePresenter<ListenExamContract.View> implements ListenExamContract.Presenter {
 
-    private Question question;
+    private Meaning question;
 
     public ListenExamPresenter(ApiClient apiClient) {
         super(apiClient);
     }
 
-    public void handleAnswer(String answer) {
-
+    @Override
+    public void loadQuestionPractice(Bundle data) {
+        Meaning question = data.getParcelable(ExamActivity.DATA_MEANING);
+        this.question = question;
+        getView().showQuestionPractice(question);
     }
 
-    public void showSuggestion() {
+    @Override
+    public void submitAnswer(String answerVoice) {
 
-    }
-
-    public void tryAgain() {
-        getView().displayQuestion(question);
     }
 }
