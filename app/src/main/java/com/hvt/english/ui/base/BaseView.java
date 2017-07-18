@@ -14,4 +14,8 @@ public interface BaseView {
     void showToast(int message);
 
     void hideKeyboard();
+
+    void attachView();
+
+    void detachView();
 }

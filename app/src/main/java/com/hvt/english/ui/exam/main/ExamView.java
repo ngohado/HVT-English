@@ -1,5 +1,6 @@
 package com.hvt.english.ui.exam.main;
 
+import com.hvt.english.model.Question;
 import com.hvt.english.ui.base.BaseView;
 
 /**
@@ -7,4 +8,11 @@ import com.hvt.english.ui.base.BaseView;
  */
 
 public interface ExamView extends BaseView {
+
+    void displayChoiceQuestion(Question question);
+
+    void displayVoiceQuestion(Question question);
+
+    void displayListenQuestion(Question question);
+
 }

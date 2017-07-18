@@ -11,7 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hvt.hbapplication.util.LocaleHelper;
+import com.hvt.english.util.LocaleHelper;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
