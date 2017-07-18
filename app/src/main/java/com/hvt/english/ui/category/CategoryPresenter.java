@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Hado on 7/13/17.
  */
 
-public class CategoryPresenter extends BasePresenter<CategoryView> {
+public class CategoryPresenter extends BasePresenter<CategoryContract.View> implements CategoryContract.Presenter {
 
     private List<Category> categories = new ArrayList<>();
 
@@ -20,21 +20,23 @@ public class CategoryPresenter extends BasePresenter<CategoryView> {
         super(apiClient);
     }
 
+    @Override
     public void loadCategories() {
         dataManager.getCategories()
-                .doOnSubscribe(disposable -> getView().showLoading())
+                .doOnSubscribe(disposable -> {
+                    getView().showLoading();
+                    compositeDisposable.add(disposable);
+                })
                 .doFinally(() -> getView().hideLoading())
                 .subscribe(data -> {
                     categories.clear();
                     categories.addAll(data);
-                    getView().displayCategories(categories);
+                    getView().showCategories(categories);
                 }, throwable -> getView().showError(R.string.categories_error_load));
     }
 
-    public void prepareNavigateToCategoryDetail(int position) {
-        if (position < categories.size()) {
-            getView().navigateToDetailCategory(categories.get(position).getId());
-        }
+    @Override
+    public void clickCategory(int position) {
+        getView().openDetailCategoryUI(categories.get(position).getId());
     }
-
 }

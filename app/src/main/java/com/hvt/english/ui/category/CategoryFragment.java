@@ -17,7 +17,7 @@ import butterknife.Unbinder;
  * Created by Hado on 7/13/17.
  */
 
-public class CategoryFragment extends BaseFragment implements CategoryView, OnClickItemListener {
+public class CategoryFragment extends BaseFragment implements OnClickItemListener, CategoryContract.View {
 
     private CategoryPresenter presenter;
 
@@ -45,16 +45,16 @@ public class CategoryFragment extends BaseFragment implements CategoryView, OnCl
 
     @Override
     public void onItemClicked(int position) {
-        presenter.prepareNavigateToCategoryDetail(position);
+        presenter.clickCategory(position);
     }
 
     @Override
-    public void displayCategories(List<Category> categories) {
-        adapter.addData(categories);
+    public void showCategories(List<Category> categories) {
+
     }
 
     @Override
-    public void navigateToDetailCategory(int categoryID) {
+    public void openDetailCategoryUI(int categoryID) {
 
     }
 }

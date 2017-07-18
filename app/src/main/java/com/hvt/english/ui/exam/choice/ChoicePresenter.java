@@ -7,7 +7,7 @@ import com.hvt.english.ui.base.BasePresenter;
  * Created by Hado on 7/13/17.
  */
 
-public class ChoicePresenter extends BasePresenter<ChoiceView> {
+public class ChoicePresenter extends BasePresenter<ChoiceExamContract.View> implements ChoiceExamContract.Presenter {
     public ChoicePresenter(ApiClient apiClient) {
         super(apiClient);
     }
