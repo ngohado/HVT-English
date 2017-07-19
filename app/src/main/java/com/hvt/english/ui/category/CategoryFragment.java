@@ -57,4 +57,14 @@ public class CategoryFragment extends BaseFragment implements OnClickItemListene
     public void openDetailCategoryUI(int categoryID) {
 
     }
+
+    @Override
+    public void attachView() {
+
+    }
+
+    @Override
+    public void detachView() {
+
+    }
 }

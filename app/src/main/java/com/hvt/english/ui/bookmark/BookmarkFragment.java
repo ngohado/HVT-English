@@ -31,4 +31,14 @@ public class BookmarkFragment extends BaseFragment {
     public Unbinder bindingView(View view) {
         return null;
     }
+
+    @Override
+    public void attachView() {
+
+    }
+
+    @Override
+    public void detachView() {
+
+    }
 }

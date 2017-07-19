@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</LinearLayout>
+    <com.hvt.english.widget.CustomFontTextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Practice Complete!"
+        android:textColor="#555555"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <com.shinelw.library.ColorArcProgressBar
+        android:id="@+id/pb_today"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_below="@+id/tv_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        app:back_width="20dp"
+        app:front_color1="@color/color1"
+        app:front_color2="@color/color2"
+        app:front_color3="@color/color3"
+        app:front_width="20dp"
+        app:is_need_content="true"
+        app:is_need_title="true"
+        app:is_need_unit="true"
+        app:max_value="100"
+        app:string_title="Score today"
+        app:string_unit="Score"
+        app:total_engle="360" />
+
+    <com.hvt.english.widget.CustomFontTextView
+        android:id="@+id/tv_reach_goals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pb_today"
+        android:layout_centerHorizontal="true"
+        android:text="1000"
+        android:textColor="@color/color3"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:background="#77C924"
+        android:text="Tiếp tục"
+        android:textColor="@android:color/white" />
+
+
+</RelativeLayout>

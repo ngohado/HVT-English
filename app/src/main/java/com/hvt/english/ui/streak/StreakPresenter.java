@@ -7,7 +7,7 @@ import com.hvt.english.ui.base.BasePresenter;
  * Created by Hado on 7/13/17.
  */
 
-public class StreakPresenter extends BasePresenter<StreakView> {
+public class StreakPresenter extends BasePresenter<StreakContract.View> implements StreakContract.Presenter {
     public StreakPresenter(ApiClient apiClient) {
         super(apiClient);
     }

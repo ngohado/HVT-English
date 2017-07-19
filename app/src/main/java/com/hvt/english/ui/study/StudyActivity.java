@@ -23,4 +23,14 @@ public class StudyActivity extends BaseActivity {
     public int getLayoutID() {
         return R.layout.fragment_study;
     }
+
+    @Override
+    public void attachView() {
+
+    }
+
+    @Override
+    public void detachView() {
+
+    }
 }

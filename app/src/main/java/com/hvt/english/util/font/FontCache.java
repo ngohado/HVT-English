@@ -12,7 +12,7 @@ public class FontCache {
     public static Typeface getTypeface(Context context, @Font String fontName) {
         Typeface typeface = fontCache.get(fontName);
         if (typeface == null) {
-            typeface = Typeface.createFromAsset(context.getAssets(), fontName);
+            typeface = Typeface.createFromAsset(context.getAssets(), "fonts/" + fontName);
             fontCache.put(fontName, typeface);
         }
         return typeface;

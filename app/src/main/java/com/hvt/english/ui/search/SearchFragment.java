@@ -33,4 +33,14 @@ public class SearchFragment extends BaseFragment {
     public Unbinder bindingView(View view) {
         return ButterKnife.bind(this, view);
     }
+
+    @Override
+    public void attachView() {
+
+    }
+
+    @Override
+    public void detachView() {
+
+    }
 }
