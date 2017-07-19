@@ -11,6 +11,10 @@ public class Constant {
 
     public static final String VI = "vi";
 
-    public static final int SCORE_PER_QUESTION_PRACTICE_DEF = 50;
+    public static final int SCORE_PER_QUESTION_PRACTICE_DEF = 25;
+
+    public static final String GOALS_SCORE_DATA = "GOALS_SCORE_DATA";
+
+    public static final int GOALS_SCORE_DEF = 500;
 
 }

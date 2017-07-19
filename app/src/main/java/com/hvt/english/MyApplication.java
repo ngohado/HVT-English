@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import com.activeandroid.ActiveAndroid;
 import com.hvt.english.network.ApiClient;
 import com.hvt.english.util.LocaleHelper;
+import com.hvt.english.util.SharedPrefUtil;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -23,12 +24,21 @@ public class MyApplication extends Application {
 
     public SharedPreferences sharedPref;
 
+
     @Override
     public void onCreate() {
         super.onCreate();
         ActiveAndroid.initialize(this);
         application = this;
         createApiClient();
+        initSomeDefault();
+    }
+
+    private void initSomeDefault() {
+        int goals = SharedPrefUtil.getInstance().getInt(Constant.GOALS_SCORE_DATA);
+        if (goals == 0) {
+            SharedPrefUtil.getInstance().putInt(Constant.GOALS_SCORE_DATA, Constant.GOALS_SCORE_DEF);
+        }
     }
 
     public static MyApplication getApplication() {
