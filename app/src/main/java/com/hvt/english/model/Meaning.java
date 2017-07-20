@@ -44,4 +44,15 @@ public class Meaning implements Parcelable {
         this.correct = in.readByte() != 0;
     }
 
+    public static final Creator<Meaning> CREATOR = new Creator<Meaning>() {
+        @Override
+        public Meaning createFromParcel(Parcel source) {
+            return new Meaning(source);
+        }
+
+        @Override
+        public Meaning[] newArray(int size) {
+            return new Meaning[size];
+        }
+    };
 }

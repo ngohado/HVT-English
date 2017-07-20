@@ -1,15 +1,19 @@
 package com.hvt.english.ui.categorydetail.sectioncard;
 
 
-import android.support.v4.app.Fragment;
+import android.os.Bundle;
 
 import com.hvt.english.model.Sentence;
 import com.hvt.english.model.Word;
 import com.hvt.english.network.ApiClient;
 import com.hvt.english.ui.base.BasePresenter;
+import com.hvt.english.ui.exam.main.ExamActivity;
+import com.hvt.english.ui.study.StudyActivity;
 import com.hvt.english.util.font.StringUtils;
 
 import java.util.ArrayList;
+
+import static com.hvt.english.ui.categorydetail.sectioncard.SectionCardFragment.CARD_TYPE_DATA;
 
 /**
  * Created by doannh on 7/20/17.
@@ -50,9 +54,22 @@ public class SectionCardPresenter extends BasePresenter<SectionCardContract.View
     }
 
     @Override
-    public void clickStart(int type) {
-        Fragment fragment = null;
+    public void clickStart(Bundle argument) {
+        int cardType = argument.getInt(CARD_TYPE_DATA);
 
-        getView().openNewScreenCorresponding(fragment);
+        Class clazz = null;
+        Bundle bundle = new Bundle();
+
+        if (cardType == SectionCardFragment.CardType.WORD.ordinal()
+                || cardType == SectionCardFragment.CardType.SENTENCE.ordinal()) {
+            clazz = StudyActivity.class;
+            bundle = argument;
+        } else if (cardType == SectionCardFragment.CardType.PRACTICE.ordinal()) {
+            clazz = ExamActivity.class;
+            bundle = argument;
+        } else { //TEST
+
+        }
+        getView().openNewScreenCorresponding(clazz, bundle);
     }
 }

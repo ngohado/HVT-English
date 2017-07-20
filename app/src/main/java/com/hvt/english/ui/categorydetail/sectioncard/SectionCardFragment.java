@@ -1,7 +1,7 @@
 package com.hvt.english.ui.categorydetail.sectioncard;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.Button;
 
@@ -116,13 +116,16 @@ public class SectionCardFragment extends BaseFragment implements SectionCardCont
     }
 
     @Override
-    public void openNewScreenCorresponding(Fragment fragment) {
-
+    public void openNewScreenCorresponding(Class clazz, Bundle bundle) {
+        Intent intent = new Intent(getContext(), clazz);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
+
 
     @OnClick(R.id.btn_start)
     public void buttonStartClicked() {
-        presenter.clickStart(getArguments().getInt(CARD_TYPE_DATA));
+        presenter.clickStart(getArguments());
     }
 
     @Override

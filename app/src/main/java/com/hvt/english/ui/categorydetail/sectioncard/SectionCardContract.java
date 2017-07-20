@@ -1,7 +1,7 @@
 package com.hvt.english.ui.categorydetail.sectioncard;
 
 
-import android.support.v4.app.Fragment;
+import android.os.Bundle;
 
 import com.hvt.english.model.Sentence;
 import com.hvt.english.model.Word;
@@ -22,7 +22,7 @@ public interface SectionCardContract {
 
         void showContent(String content);
 
-        void openNewScreenCorresponding(Fragment fragment);
+        void openNewScreenCorresponding(Class clazz, Bundle bundle);
     }
 
     interface Presenter extends IBasePresenter<View> {
@@ -34,7 +34,7 @@ public interface SectionCardContract {
 
         void loadTest();
 
-        void clickStart(int type);
+        void clickStart(Bundle argument);
     }
 
 }
