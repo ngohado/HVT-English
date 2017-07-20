@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.exam.main.ExamActivity" />
+        <activity android:name=".ui.categorydetail.DetailActivity" />
 
         <meta-data android:name="AA_DB_NAME" android:value="HVTEnglish" />
         <meta-data android:name="AA_DB_VERSION" android:value="1" />

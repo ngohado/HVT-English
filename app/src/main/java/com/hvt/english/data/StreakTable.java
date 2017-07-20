@@ -8,7 +8,7 @@ import com.activeandroid.annotation.Table;
  * Created by Hado on 7/19/17.
  */
 
-@Table(name = "StreakTable", id = "day")
+@Table(name = "StreakTable")
 public class StreakTable extends Model {
 
     @Column(name = "day")
