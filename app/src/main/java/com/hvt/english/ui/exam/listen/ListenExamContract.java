@@ -20,5 +20,7 @@ public interface ListenExamContract {
         void loadQuestionPractice(Bundle data);
 
         void submitAnswer(String answerVoice);
+
+        void clickSound();
     }
 }

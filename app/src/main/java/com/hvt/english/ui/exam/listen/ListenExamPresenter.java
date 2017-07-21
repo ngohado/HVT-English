@@ -28,6 +28,11 @@ public class ListenExamPresenter extends BasePresenter<ListenExamContract.View> 
 
     @Override
     public void submitAnswer(String answerVoice) {
+        getView().showResult(question.content.equalsIgnoreCase(answerVoice));
+    }
+
+    @Override
+    public void clickSound() {
 
     }
 }

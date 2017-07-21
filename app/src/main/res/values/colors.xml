@@ -6,4 +6,6 @@
     <color name="color1">#FFB400</color>
     <color name="color2">#FF9800</color>
     <color name="color3">#FF7900</color>
+    <color name="exam_color_correct">#8077C924</color>
+    <color name="exam_color_incorrect">#80FE0000</color>
 </resources>

@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.hvt.english.R;
-import com.hvt.english.ui.study.card.CardFragment;
+import com.hvt.english.ui.exam.listen.ListenExamFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, new CardFragment());
+        transaction.replace(R.id.container, new ListenExamFragment());
         transaction.commit();
     }
 }

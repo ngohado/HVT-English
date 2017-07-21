@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp">
+
+        <RelativeLayout
+            android:id="@+id/layout_total"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_sound"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/sound_icon" />
+
+            <ImageButton
+                android:id="@+id/iv_idea"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_margin="10dp"
+                android:background="@drawable/idea_selector" />
+
+            <com.hvt.english.widget.CustomFontTextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="70dp"
+                android:gravity="center"
+                android:text="Complex"
+                android:textColor="@android:color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
+            <com.hvt.english.widget.CustomFontEditText
+                android:id="@+id/edt_compose_answer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/btn_submit"
+                android:layout_below="@+id/tv_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/listen_edittext_answer_background"
+                android:gravity="top"
+                android:padding="10dp"
+                android:textCursorDrawable="@drawable/listen_edittext_cursor" />
+
+            <com.hvt.english.widget.CustomFontButton
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#77C924"
+                android:text="Submit"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
