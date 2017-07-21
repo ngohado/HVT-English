@@ -9,10 +9,8 @@ import com.github.channguyen.rsv.RangeSliderView;
 import com.hvt.english.R;
 import com.hvt.english.ui.base.BaseActivity;
 import com.hvt.english.ui.categorydetail.adapter.SectionAdapter;
-import com.hvt.english.ui.study.card.CardFragment;
 import com.hvt.english.util.DialogUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -38,6 +36,7 @@ public class StudyActivity extends BaseActivity implements StudyContract.View {
 
     StudyContract.Presenter presenter;
 
+
     @Override
     public void initView() {
         vpCards.setClipToPadding(false);
@@ -49,7 +48,7 @@ public class StudyActivity extends BaseActivity implements StudyContract.View {
 
     @Override
     public void initData() {
-        showStudyContent(new ArrayList<>());
+        presenter.loadData(getIntent().getExtras());
     }
 
     @Override
@@ -72,40 +71,45 @@ public class StudyActivity extends BaseActivity implements StudyContract.View {
 
     @Override
     public void showStudyContent(List<Fragment> cards) {
-        cards.add(new CardFragment());
-        cards.add(new CardFragment());
-        cards.add(new CardFragment());
-        cards.add(new CardFragment());
-        cards.add(new CardFragment());
-        cards.add(new CardFragment());
-        cards.add(new CardFragment());
-        cards.add(new CardFragment());
-        cards.add(new CardFragment());
-        cards.add(new CardFragment());
         adapter.setData(cards);
         adapter.notifyDataSetChanged();
         rsvSmall.setRangeCount(cards.size());
     }
 
+    @Override
+    public void showStreakScreen(int point, int type) {
+
+    }
+
+    @Override
+    public void showDialogConfirmExit() {
+        DialogUtils.showDialog(this, "Exit class", "You're studying!! Are you want to exit class?", "Exit", new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                sweetAlertDialog.dismiss();
+                finish();
+            }
+        });
+    }
+
+    @Override
+    public void changeCard(int atPosition) {
+        rsvSmall.setCurrentIndex(atPosition);
+        vpCards.setCurrentItem(atPosition, true);
+    }
+
+
     @OnClick({R.id.btn_back, R.id.btn_next, R.id.tv_close})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_back:
-                rsvSmall.setCurrentIndex(rsvSmall.getCurrentIndex() - 1);
-                vpCards.setCurrentItem(vpCards.getCurrentItem() - 1, true);
+                presenter.clickBack(vpCards.getCurrentItem());
                 break;
             case R.id.btn_next:
-                rsvSmall.setCurrentIndex(rsvSmall.getCurrentIndex() + 1);
-                vpCards.setCurrentItem(vpCards.getCurrentItem() + 1, true);
+                presenter.clickNext(vpCards.getCurrentItem());
                 break;
             case R.id.tv_close:
-                DialogUtils.showDialog(this, "Exit class", "You're studying!! Are you want to exit class?", "Exit",new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        sweetAlertDialog.dismiss();
-                        finish();
-                    }
-                });
+                showDialogConfirmExit();
                 break;
         }
     }

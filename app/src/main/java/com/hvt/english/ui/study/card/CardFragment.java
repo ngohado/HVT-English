@@ -1,13 +1,18 @@
 package com.hvt.english.ui.study.card;
 
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.hvt.english.MyApplication;
 import com.hvt.english.R;
 import com.hvt.english.model.Meaning;
+import com.hvt.english.model.Sentence;
+import com.hvt.english.model.Word;
 import com.hvt.english.ui.base.BaseFragment;
+import com.hvt.english.ui.categorydetail.sectioncard.SectionCardFragment;
 import com.hvt.english.widget.CustomFontTextView;
 
 import butterknife.BindView;
@@ -36,6 +41,27 @@ public class CardFragment extends BaseFragment implements CardContract.View {
     @BindView(R.id.cv_total)
     CardView cvTotal;
 
+    CardContract.Presenter presenter;
+
+    public static CardFragment newInstance(Word data) {
+        CardFragment fragment = new CardFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(SectionCardFragment.CARD_TYPE_DATA, SectionCardFragment.CardType.WORD.ordinal());
+        bundle.putParcelable(MEANING_DATA, data);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    public static CardFragment newInstance(Sentence data) {
+        CardFragment fragment = new CardFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(SectionCardFragment.CARD_TYPE_DATA, SectionCardFragment.CardType.WORD.ordinal());
+        bundle.putParcelable(MEANING_DATA, data);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+
     @Override
     public void initView() {
 
@@ -43,7 +69,7 @@ public class CardFragment extends BaseFragment implements CardContract.View {
 
     @Override
     public void initData() {
-
+        presenter.loadData(getArguments());
     }
 
     @Override
@@ -58,12 +84,15 @@ public class CardFragment extends BaseFragment implements CardContract.View {
 
     @Override
     public void attachView() {
-
+        if (presenter == null) {
+            presenter = new CardPresenter(MyApplication.getApplication().getApiClient());
+        }
+        presenter.onAttach(this);
     }
 
     @Override
     public void detachView() {
-
+        presenter.onDetach();
     }
 
     @OnClick(R.id.iv_sound)

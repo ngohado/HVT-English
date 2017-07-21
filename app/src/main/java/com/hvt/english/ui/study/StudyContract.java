@@ -15,9 +15,19 @@ import java.util.List;
 public interface StudyContract {
     interface View extends BaseView {
         void showStudyContent(List<Fragment> cards);
+
+        void showStreakScreen(int point, int type);
+
+        void showDialogConfirmExit();
+
+        void changeCard(int atPosition);
     }
 
     interface Presenter extends IBasePresenter<View> {
         void loadData(Bundle data);
+
+        void clickNext(int currentPosition);
+
+        void clickBack(int currentPosition);
     }
 }

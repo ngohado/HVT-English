@@ -17,4 +17,6 @@ public class Constant {
 
     public static final int GOALS_SCORE_DEF = 500;
 
+    public static final int SCORE_STUDY_DEF = 3;
+
 }
