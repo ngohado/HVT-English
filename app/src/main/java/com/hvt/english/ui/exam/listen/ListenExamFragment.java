@@ -40,6 +40,8 @@ public class ListenExamFragment extends BaseFragment implements ListenExamContra
     CustomFontEditText edtComposeAnswer;
     @BindView(R.id.btn_submit)
     CustomFontButton btnSubmit;
+    @BindView(R.id.btn_continue)
+    CustomFontButton btnContinue;
     @BindView(R.id.layout_total)
     RelativeLayout layoutContainer;
 
@@ -66,7 +68,7 @@ public class ListenExamFragment extends BaseFragment implements ListenExamContra
 
     @Override
     public void initView() {
-
+        btnContinue.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -87,6 +89,7 @@ public class ListenExamFragment extends BaseFragment implements ListenExamContra
     @Override
     public void showResult(boolean correct) {
         layoutContainer.setBackgroundColor(getResources().getColor(correct ? R.color.exam_color_correct : R.color.exam_color_incorrect));
+        btnContinue.setVisibility(View.VISIBLE);
         DialogUtils.showDialogResult(getContext(), correct);
     }
 
@@ -108,7 +111,7 @@ public class ListenExamFragment extends BaseFragment implements ListenExamContra
         return false;
     }
 
-    @OnClick({R.id.iv_sound, R.id.btn_submit})
+    @OnClick({R.id.iv_sound, R.id.btn_submit, R.id.btn_continue})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_sound:
@@ -117,6 +120,10 @@ public class ListenExamFragment extends BaseFragment implements ListenExamContra
             case R.id.btn_submit:
                 presenter.submitAnswer(edtComposeAnswer.getText().toString());
                 break;
+            case R.id.btn_continue:
+
+                break;
+
         }
     }
 }
