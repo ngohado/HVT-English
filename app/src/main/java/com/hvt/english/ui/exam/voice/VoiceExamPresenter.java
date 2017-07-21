@@ -30,4 +30,14 @@ public class VoiceExamPresenter extends BasePresenter<VoiceExamContract.View> im
     public void submitAnswer(String answerVoice) {
 
     }
+
+    @Override
+    public void clickSound() {
+
+    }
+
+    @Override
+    public void clickSpeech() {
+        getView().showGoogleRecognizeSpeech();
+    }
 }

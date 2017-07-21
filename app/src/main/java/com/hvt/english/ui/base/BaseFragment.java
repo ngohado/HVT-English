@@ -46,6 +46,7 @@ public abstract class BaseFragment extends Fragment implements BaseView, SwipeRe
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        attachView();
         if (context instanceof BaseActivity) {
             parentActivity = (BaseActivity) context;
         }
@@ -65,6 +66,7 @@ public abstract class BaseFragment extends Fragment implements BaseView, SwipeRe
         if (mUnBinder != null) {
             mUnBinder.unbind();
         }
+        detachView();
         super.onDestroy();
     }
 

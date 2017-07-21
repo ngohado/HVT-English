@@ -13,11 +13,17 @@ import com.hvt.english.ui.exam.BaseExamView;
 public interface VoiceExamContract {
     interface View extends BaseExamView {
         void showQuestionPractice(Meaning meaning);
+
+        void showGoogleRecognizeSpeech();
     }
 
     interface Presenter extends IBasePresenter<View> {
         void loadQuestionPractice(Bundle data);
 
         void submitAnswer(String answerVoice);
+
+        void clickSound();
+
+        void clickSpeech();
     }
 }
