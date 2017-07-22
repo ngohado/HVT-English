@@ -31,6 +31,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     protected void attachBaseContext(Context newBase) {
+        attachView();
         super.attachBaseContext(LocaleHelper.onAttach(newBase));
     }
 
@@ -46,6 +47,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         if (mUnBinder != null) {
             mUnBinder.unbind();
         }
+        detachView();
         super.onDestroy();
     }
 
