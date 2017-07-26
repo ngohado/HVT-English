@@ -2,7 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:rsv="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layout_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <com.hvt.english.widget.CustomFontTextView
+            android:id="@+id/tv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Close"
+            android:textSize="16sp" />
+
+        <com.github.channguyen.rsv.RangeSliderView
+            android:id="@+id/rsv_small"
+            rsv:filledColor="#FB4F08"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/container"

@@ -7,6 +7,8 @@ import com.hvt.english.network.ApiClient;
 import com.hvt.english.ui.base.BasePresenter;
 import com.hvt.english.ui.exam.main.ExamActivity;
 
+import java.util.ArrayList;
+
 /**
  * Created by Hado on 7/13/17.
  */
@@ -27,8 +29,16 @@ public class VoiceExamPresenter extends BasePresenter<VoiceExamContract.View> im
     }
 
     @Override
-    public void submitAnswer(String answerVoice) {
-
+    public void submitAnswer(ArrayList<String> answersVoice) {
+        for (String answer : answersVoice) {
+            if (question.content.equalsIgnoreCase(answer)) {
+                getView().showResult(true);
+                getView().updateMainView(question, true);
+                return;
+            }
+        }
+        getView().showResult(false);
+        getView().updateMainView(question, false);
     }
 
     @Override

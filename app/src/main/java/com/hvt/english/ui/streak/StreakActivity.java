@@ -1,28 +1,38 @@
 package com.hvt.english.ui.streak;
 
-import android.view.View;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 
 import com.hvt.english.MyApplication;
 import com.hvt.english.R;
-import com.hvt.english.ui.base.BaseFragment;
+import com.hvt.english.ui.base.BaseActivity;
 import com.hvt.english.widget.CustomFontTextView;
 import com.shinelw.library.ColorArcProgressBar;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Created by Hado on 7/13/17.
  */
 
-public class StreakFragment extends BaseFragment implements StreakContract.View {
+public class StreakActivity extends BaseActivity implements StreakContract.View {
 
     public static final String POINT_DATA = "POINT_DATA";
     public static final String TYPE_DATA = "TYPE_DATA";
+
     public static final int EXAM = 1;
     public static final int PRACTICE = 2;
+    public static final int STUDY = 3;
+
+    public static void navigate(Context context, int previousScreen, int scoreAddition) {
+        Intent intent = new Intent(context, StreakActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt(TYPE_DATA, previousScreen);
+        bundle.putInt(POINT_DATA, scoreAddition);
+        context.startActivity(intent);
+    }
 
     @BindView(R.id.pb_today)
     ColorArcProgressBar pbToday;
@@ -45,17 +55,12 @@ public class StreakFragment extends BaseFragment implements StreakContract.View 
 
     @Override
     public void initData() {
-//        presenter.loadData(getArguments());
+        presenter.loadData(getIntent().getExtras());
     }
 
     @Override
     public int getLayoutID() {
-        return R.layout.fragment_streak;
-    }
-
-    @Override
-    public Unbinder bindingView(View view) {
-        return ButterKnife.bind(this, view);
+        return R.layout.activity_streak;
     }
 
     @Override

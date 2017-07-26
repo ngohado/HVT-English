@@ -5,4 +5,5 @@
     <string name="streak_title_practice_complete">Practice Complete!</string>
     <string name="streak_title_exam_complete">Test Complete!</string>
     <string name="speech_prompt">I am listening to you</string>
+    <string name="streak_title_study_complete">Study completed!</string>
 </resources>

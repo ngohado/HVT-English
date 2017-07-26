@@ -11,6 +11,7 @@ import com.hvt.english.MyApplication;
 import com.hvt.english.R;
 import com.hvt.english.model.Meaning;
 import com.hvt.english.ui.base.BaseFragment;
+import com.hvt.english.ui.exam.ContinueQuestionListener;
 import com.hvt.english.ui.exam.main.ExamActivity;
 import com.hvt.english.util.DialogUtils;
 import com.hvt.english.widget.CustomFontButton;
@@ -45,12 +46,19 @@ public class ListenExamFragment extends BaseFragment implements ListenExamContra
     @BindView(R.id.layout_total)
     RelativeLayout layoutContainer;
 
+    ContinueQuestionListener continueQuestionListener;
+
+
     public static ListenExamFragment newInstance(Meaning meaning) {
         ListenExamFragment fragment = new ListenExamFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable(ExamActivity.DATA_MEANING, meaning);
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    public void setContinueQuestionListener(ContinueQuestionListener continueQuestionListener) {
+        this.continueQuestionListener = continueQuestionListener;
     }
 
     @Override
@@ -73,7 +81,7 @@ public class ListenExamFragment extends BaseFragment implements ListenExamContra
 
     @Override
     public void initData() {
-//        presenter.loadQuestionPractice(getArguments());
+        presenter.loadQuestionPractice(getArguments());
     }
 
     @Override
@@ -91,6 +99,13 @@ public class ListenExamFragment extends BaseFragment implements ListenExamContra
         layoutContainer.setBackgroundColor(getResources().getColor(correct ? R.color.exam_color_correct : R.color.exam_color_incorrect));
         btnContinue.setVisibility(View.VISIBLE);
         DialogUtils.showDialogResult(getContext(), correct);
+    }
+
+    @Override
+    public void updateMainView(Meaning question, boolean correct) {
+        if (continueQuestionListener != null) {
+            continueQuestionListener.resultAnswer(question, correct);
+        }
     }
 
     @Override
@@ -121,7 +136,9 @@ public class ListenExamFragment extends BaseFragment implements ListenExamContra
                 presenter.submitAnswer(edtComposeAnswer.getText().toString());
                 break;
             case R.id.btn_continue:
-
+                if (continueQuestionListener != null) {
+                    continueQuestionListener.onContinue();
+                }
                 break;
 
         }

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rsv="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layout_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <com.hvt.english.widget.CustomFontTextView
+            android:id="@+id/tv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Close"
+            android:textSize="16sp" />
+
+        <com.github.channguyen.rsv.RangeSliderView
+            android:id="@+id/rsv_small"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            rsv:filledColor="#FB4F08" />
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_total"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.hvt.english.widget.CustomFontTextView
+                android:id="@+id/tv_question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="50dp"
+                android:gravity="center"
+                android:text="you, are, milk, sandwich, rice, they, child"
+                android:textColor="@android:color/background_dark"
+                android:textSize="18sp" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_question"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp">
+
+                <com.hvt.english.widget.CustomFontRadioButton
+                    android:id="@+id/rdb_answer_a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/background_dark"
+                    tools:text="Answer A" />
+
+                <com.hvt.english.widget.CustomFontRadioButton
+                    android:id="@+id/rdb_answer_b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/background_dark"
+                    tools:text="Answer B" />
+
+                <com.hvt.english.widget.CustomFontRadioButton
+                    android:id="@+id/rdb_answer_c"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/background_dark"
+                    tools:text="Answer C" />
+
+                <com.hvt.english.widget.CustomFontRadioButton
+                    android:id="@+id/rdb_answer_d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/background_dark"
+                    tools:text="Answer D" />
+
+            </RadioGroup>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

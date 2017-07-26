@@ -9,6 +9,7 @@ import com.github.channguyen.rsv.RangeSliderView;
 import com.hvt.english.R;
 import com.hvt.english.ui.base.BaseActivity;
 import com.hvt.english.ui.categorydetail.adapter.SectionAdapter;
+import com.hvt.english.ui.streak.StreakActivity;
 import com.hvt.english.util.DialogUtils;
 
 import java.util.List;
@@ -21,7 +22,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * Created by Hado on 7/13/17.
  */
 
-public class StudyActivity extends BaseActivity implements StudyContract.View {
+public class StudyActivity extends BaseActivity implements StudyContract.View, ViewPager.OnPageChangeListener {
 
     @BindView(R.id.rsv_small)
     RangeSliderView rsvSmall;
@@ -42,6 +43,7 @@ public class StudyActivity extends BaseActivity implements StudyContract.View {
         vpCards.setClipToPadding(false);
         vpCards.setPadding(100, 0, 100, 0);
         vpCards.setPageMargin(25);
+        vpCards.addOnPageChangeListener(this);
         adapter = new SectionAdapter(getSupportFragmentManager());
         vpCards.setAdapter(adapter);
     }
@@ -78,7 +80,8 @@ public class StudyActivity extends BaseActivity implements StudyContract.View {
 
     @Override
     public void showStreakScreen(int point, int type) {
-
+        finish();
+        StreakActivity.navigate(this, StreakActivity.STUDY, point);
     }
 
     @Override
@@ -112,5 +115,20 @@ public class StudyActivity extends BaseActivity implements StudyContract.View {
                 showDialogConfirmExit();
                 break;
         }
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        //do nothing
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        changeCard(position);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+        //do nothing
     }
 }

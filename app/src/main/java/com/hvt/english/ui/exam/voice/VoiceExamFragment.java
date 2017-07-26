@@ -15,18 +15,17 @@ import com.hvt.english.MyApplication;
 import com.hvt.english.R;
 import com.hvt.english.model.Meaning;
 import com.hvt.english.ui.base.BaseFragment;
+import com.hvt.english.ui.exam.ContinueQuestionListener;
 import com.hvt.english.ui.exam.main.ExamActivity;
 import com.hvt.english.widget.CustomFontTextView;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTouch;
 import butterknife.Unbinder;
-import io.reactivex.Observable;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -44,11 +43,16 @@ public class VoiceExamFragment extends BaseFragment implements VoiceExamContract
     ImageButton ivIdea;
     @BindView(R.id.tv_content)
     CustomFontTextView tvContent;
+    @BindView(R.id.tv_try_again)
+    CustomFontTextView tvTryAgain;
     @BindView(R.id.btn_speech)
     ImageButton btnSpeech;
     @BindView(R.id.layout_total)
     RelativeLayout layoutTotal;
+
     private VoiceExamContract.Presenter presenter;
+
+    ContinueQuestionListener continueQuestionListener;
 
     public static VoiceExamFragment newInstance(Meaning meaning) {
         VoiceExamFragment fragment = new VoiceExamFragment();
@@ -65,7 +69,7 @@ public class VoiceExamFragment extends BaseFragment implements VoiceExamContract
 
     @Override
     public void initData() {
-//        presenter.loadQuestionPractice(getArguments());
+        presenter.loadQuestionPractice(getArguments());
     }
 
     @Override
@@ -95,7 +99,21 @@ public class VoiceExamFragment extends BaseFragment implements VoiceExamContract
     @Override
     public void showResult(boolean correct) {
         layoutTotal.setBackgroundColor(getResources().getColor(correct ? R.color.exam_color_correct : R.color.exam_color_incorrect));
+        tvTryAgain.setVisibility(correct ? View.INVISIBLE : View.VISIBLE);
     }
+
+    @Override
+    public void updateMainView(Meaning question, boolean correct) {
+        if (continueQuestionListener != null) {
+            continueQuestionListener.resultAnswer(question, correct);
+        }
+    }
+
+
+    public void setContinueQuestionListener(ContinueQuestionListener continueQuestionListener) {
+        this.continueQuestionListener = continueQuestionListener;
+    }
+
 
     @Override
     public void showQuestionPractice(Meaning meaning) {
@@ -107,14 +125,14 @@ public class VoiceExamFragment extends BaseFragment implements VoiceExamContract
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US");
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
                 getString(R.string.speech_prompt));
         try {
             startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
         } catch (ActivityNotFoundException a) {
             Toast.makeText(getContext().getApplicationContext(),
-                    "Do not support to your device",
+                    "This feature do not support to your device",
                     Toast.LENGTH_SHORT).show();
         }
     }
@@ -132,7 +150,7 @@ public class VoiceExamFragment extends BaseFragment implements VoiceExamContract
         return false;
     }
 
-    @OnClick({R.id.iv_sound, R.id.btn_speech})
+    @OnClick({R.id.iv_sound, R.id.btn_speech, R.id.btn_continue})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_sound:
@@ -140,6 +158,11 @@ public class VoiceExamFragment extends BaseFragment implements VoiceExamContract
                 break;
             case R.id.btn_speech:
                 presenter.clickSpeech();
+                break;
+            case R.id.btn_continue:
+                if (continueQuestionListener != null) {
+                    continueQuestionListener.onContinue();
+                }
                 break;
         }
     }
@@ -150,10 +173,9 @@ public class VoiceExamFragment extends BaseFragment implements VoiceExamContract
         switch (requestCode) {
             case REQ_CODE_SPEECH_INPUT: {
                 if (resultCode == RESULT_OK && null != data) {
-
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    Observable.fromIterable(result).subscribe(s -> System.out.println(s));
+                    presenter.submitAnswer(result);
                 }
                 break;
             }

@@ -1,5 +1,6 @@
 package com.hvt.english.ui.exam;
 
+import com.hvt.english.model.Meaning;
 import com.hvt.english.ui.base.BaseView;
 
 /**
@@ -8,4 +9,6 @@ import com.hvt.english.ui.base.BaseView;
 
 public interface BaseExamView extends BaseView {
     void showResult(boolean correct);
+
+    void updateMainView(Meaning question, boolean correct);
 }

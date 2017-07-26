@@ -43,6 +43,15 @@
                 android:textStyle="bold"
                 android:visibility="invisible" />
 
+            <com.hvt.english.widget.CustomFontTextView
+                android:id="@+id/tv_try_again"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/btn_speech"
+                android:layout_centerHorizontal="true"
+                android:text="Try again?"
+                android:textColor="@android:color/white" />
+
             <ImageButton
                 android:id="@+id/btn_speech"
                 android:layout_width="100dp"
@@ -58,7 +67,7 @@
                 android:text="Tap on mic to speak" />
 
             <com.hvt.english.widget.CustomFontButton
-                android:id="@+id/btn_submit"
+                android:id="@+id/btn_continue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"

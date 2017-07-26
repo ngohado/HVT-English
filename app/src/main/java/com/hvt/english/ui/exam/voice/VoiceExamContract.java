@@ -6,6 +6,8 @@ import com.hvt.english.model.Meaning;
 import com.hvt.english.ui.base.IBasePresenter;
 import com.hvt.english.ui.exam.BaseExamView;
 
+import java.util.ArrayList;
+
 /**
  * Created by Hado on 7/13/17.
  */
@@ -20,7 +22,7 @@ public interface VoiceExamContract {
     interface Presenter extends IBasePresenter<View> {
         void loadQuestionPractice(Bundle data);
 
-        void submitAnswer(String answerVoice);
+        void submitAnswer(ArrayList<String> answersVoice);
 
         void clickSound();
 

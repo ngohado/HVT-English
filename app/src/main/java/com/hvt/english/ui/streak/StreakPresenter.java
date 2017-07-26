@@ -20,13 +20,20 @@ public class StreakPresenter extends BasePresenter<StreakContract.View> implemen
 
     @Override
     public void loadData(Bundle data) {
-        int points = data.getInt(StreakFragment.POINT_DATA);
+        int points = data.getInt(StreakActivity.POINT_DATA);
         getView().showScorePlus(points);
 
         int todayPoint = dataManager.getTodayPoints();
 
-        int type = data.getInt(StreakFragment.TYPE_DATA);
-        getView().showResultTitle(type == StreakFragment.PRACTICE ? R.string.streak_title_practice_complete : R.string.streak_title_exam_complete);
+        int type = data.getInt(StreakActivity.TYPE_DATA);
+
+        if (type == StreakActivity.PRACTICE) {
+            getView().showResultTitle(R.string.streak_title_practice_complete);
+        } else if (type == StreakActivity.EXAM) {
+            getView().showResultTitle(R.string.streak_title_exam_complete);
+        } else if (type == StreakActivity.STUDY) {
+            getView().showResultTitle(R.string.streak_title_study_complete);
+        }
 
         float percent = Math.round(todayPoint / SharedPrefUtil.getInstance().getInt(Constant.GOALS_SCORE_DATA));
         getView().showProgressGoals(Math.min(percent, 100), todayPoint);

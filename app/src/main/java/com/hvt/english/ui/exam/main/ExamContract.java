@@ -1,5 +1,7 @@
 package com.hvt.english.ui.exam.main;
 
+import android.os.Bundle;
+
 import com.hvt.english.model.Meaning;
 import com.hvt.english.ui.base.BaseView;
 import com.hvt.english.ui.base.IBasePresenter;
@@ -14,15 +16,17 @@ public interface ExamContract {
 
         void showListenQuestion(Meaning question);
 
-        void updateProgressBar(int current, int total);
+        void updateProgressBar(int current);
 
         void updateScoreView(int score);
+
+        void updateProgressCount(int maxCount);
 
         void showGoalToday(int scoreArchive);
     }
 
     interface Presenter extends IBasePresenter<View> {
-        void loadQuestions(int categoryId);
+        void loadData(Bundle bundle);
 
         void updateResult(Meaning meaning, boolean isCorrect);
 
