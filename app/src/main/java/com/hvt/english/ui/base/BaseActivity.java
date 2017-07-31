@@ -11,14 +11,17 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hvt.english.util.DialogUtils;
 import com.hvt.english.util.LocaleHelper;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 
     private Unbinder mUnBinder;
+    private SweetAlertDialog dialogLoading;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,12 +56,17 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     public void showLoading() {
-
+        if (dialogLoading == null) {
+            dialogLoading = DialogUtils.showLoadingDialog(this);
+        }
+        dialogLoading.show();
     }
 
     @Override
     public void hideLoading() {
-
+        if (dialogLoading != null) {
+            dialogLoading.dismissWithAnimation();
+        }
     }
 
     @Override

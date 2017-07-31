@@ -51,6 +51,7 @@ public class StudyPresenter extends BasePresenter<StudyContract.View> implements
     @Override
     public void clickNext(int currentPosition) {
         if (currentPosition == cards.size() - 1) {
+            dataManager.savePoints(cards.size() * Constant.SCORE_STUDY_DEF);
             getView().showStreakScreen(cards.size() * Constant.SCORE_STUDY_DEF, typeCard);
         } else {
             getView().changeCard(currentPosition + 1);

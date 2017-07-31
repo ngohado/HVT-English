@@ -2,6 +2,7 @@ package com.hvt.english.data;
 
 import com.activeandroid.query.Select;
 import com.hvt.english.model.Category;
+import com.hvt.english.model.Question;
 import com.hvt.english.model.Section;
 import com.hvt.english.model.Sentence;
 import com.hvt.english.model.Word;
@@ -13,7 +14,6 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.BiFunction;
 import io.reactivex.schedulers.Schedulers;
 
 public class DataManager {
@@ -26,6 +26,12 @@ public class DataManager {
 
     public Observable<List<Category>> getCategories() {
         return apiClient.getCategories()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<List<Question>> getQuestion(int categoryID) {
+        return apiClient.getQuestions(categoryID)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -56,12 +62,9 @@ public class DataManager {
     }
 
     public Observable<Section> getDataSectionRemote(int categoryId) {
-        return Observable.zip(apiClient.getWords(categoryId), apiClient.getSentences(categoryId), new BiFunction<List<Word>, List<Sentence>, Section>() {
-            @Override
-            public Section apply(List<Word> words, List<Sentence> sentences) throws Exception {
-                return new Section(words, sentences);
-            }
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        return Observable.zip(apiClient.getWords(categoryId), apiClient.getSentences(categoryId), Section::new)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     public Observable<List<Word>> getWordsRemote(int categoryId) {

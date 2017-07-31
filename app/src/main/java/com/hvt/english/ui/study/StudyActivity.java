@@ -16,7 +16,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by Hado on 7/13/17.
@@ -86,12 +85,9 @@ public class StudyActivity extends BaseActivity implements StudyContract.View, V
 
     @Override
     public void showDialogConfirmExit() {
-        DialogUtils.showDialog(this, "Exit class", "You're studying!! Are you want to exit class?", "Exit", new SweetAlertDialog.OnSweetClickListener() {
-            @Override
-            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                sweetAlertDialog.dismiss();
-                finish();
-            }
+        DialogUtils.showDialog(this, "Exit class", "You're studying!! Are you want to exit class?", "Exit", sweetAlertDialog -> {
+            sweetAlertDialog.dismiss();
+            finish();
         });
     }
 

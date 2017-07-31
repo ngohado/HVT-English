@@ -35,8 +35,29 @@
         android:layout_margin="5dp">
 
         <RelativeLayout
+            android:id="@+id/layout_total"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <com.hvt.english.widget.CustomFontTextView
+                android:id="@+id/tv_remaining"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:layout_toLeftOf="@+id/tv_second"
+                android:text="remaining..."
+                android:textSize="15sp" />
+
+            <com.hvt.english.widget.CustomFontTextView
+                android:id="@+id/tv_second"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="30"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <com.hvt.english.widget.CustomFontTextView
                 android:id="@+id/tv_question"
@@ -44,11 +65,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="60dp"
                 android:gravity="center"
-                android:text="you, are, milk, sandwich, rice, they, child"
                 android:textColor="@android:color/background_dark"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:text="you, are, milk, sandwich, rice, they, child" />
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -87,6 +108,19 @@
                     tools:text="Answer D" />
 
             </RadioGroup>
+
+            <com.hvt.english.widget.CustomFontButton
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#77C924"
+                android:text="Submit"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

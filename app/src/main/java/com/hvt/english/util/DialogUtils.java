@@ -1,6 +1,7 @@
 package com.hvt.english.util;
 
 import android.content.Context;
+import android.graphics.Color;
 
 import java.util.Random;
 
@@ -19,6 +20,14 @@ public class DialogUtils {
         dialog.setConfirmText(confirm);
         dialog.setConfirmClickListener(listener);
         dialog.show();
+    }
+
+    public static SweetAlertDialog showLoadingDialog(Context context) {
+        SweetAlertDialog dialog = new SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE);
+        dialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        dialog.setTitleText("Loading");
+        dialog.setCancelable(false);
+        return dialog;
     }
 
     public static void showDialogResult(Context context, boolean correct) {

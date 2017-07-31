@@ -16,16 +16,19 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity android:name=".ui.main.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.exam.main.ExamActivity" />
         <activity android:name=".ui.categorydetail.DetailActivity" />
         <activity android:name=".ui.study.StudyActivity">
 
+        </activity>
+        <activity android:name=".ui.realexam.RealExamActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <meta-data

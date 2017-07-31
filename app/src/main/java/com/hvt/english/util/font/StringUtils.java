@@ -1,5 +1,6 @@
 package com.hvt.english.util.font;
 
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.hvt.english.model.Sentence;
@@ -19,6 +20,15 @@ public class StringUtils {
             textView.setText(string);
         }
     }
+
+    public static void setText(RadioButton textView, String string) {
+        if (string == null) {
+            textView.setText("");
+        } else {
+            textView.setText(string);
+        }
+    }
+
 
     //separator: CharSequence = ", ", prefix: CharSequence = "", postfix: CharSequence = "", limit: Int = -1, truncated: CharSequence = "..."
     public static String wordsToString(ArrayList<Word> words) {

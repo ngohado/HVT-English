@@ -65,6 +65,7 @@ public class ExamPresenter extends BasePresenter<ExamContract.View> implements E
     public void clickNext() {
         if (currentQuestion == questions.size() - 1) {
             getView().updateProgressBar(currentQuestion);
+            dataManager.savePoints(currentScore);
             getView().showGoalToday(currentScore);
         } else {
             nextQuestion();
