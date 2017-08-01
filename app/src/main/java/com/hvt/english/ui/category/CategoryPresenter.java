@@ -8,9 +8,6 @@ import com.hvt.english.ui.base.BasePresenter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Hado on 7/13/17.
- */
 
 public class CategoryPresenter extends BasePresenter<CategoryContract.View> implements CategoryContract.Presenter {
 
@@ -36,7 +33,7 @@ public class CategoryPresenter extends BasePresenter<CategoryContract.View> impl
     }
 
     @Override
-    public void clickCategory(int position) {
+    public void chooseCategory(int position) {
         getView().openDetailCategoryUI(categories.get(position).getId());
     }
 }

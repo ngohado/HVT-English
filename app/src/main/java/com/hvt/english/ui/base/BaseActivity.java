@@ -72,7 +72,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     public void showError(String message) {
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
-                message, Snackbar.LENGTH_SHORT);
+                message, Snackbar.LENGTH_LONG);
         View sbView = snackbar.getView();
         TextView textView = (TextView) sbView
                 .findViewById(android.support.design.R.id.snackbar_text);
@@ -83,7 +83,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     public void showError(int message) {
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
-                message, Snackbar.LENGTH_SHORT);
+                message, Snackbar.LENGTH_LONG);
         View sbView = snackbar.getView();
         TextView textView = (TextView) sbView
                 .findViewById(android.support.design.R.id.snackbar_text);

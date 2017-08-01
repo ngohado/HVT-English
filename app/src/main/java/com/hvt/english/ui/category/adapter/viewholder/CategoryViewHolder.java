@@ -8,10 +8,6 @@ import com.hvt.english.ui.base.OnClickItemListener;
 
 import butterknife.ButterKnife;
 
-/**
- * Created by Hado on 7/15/17.
- */
-
 public class CategoryViewHolder extends BaseViewHolder<Category> {
 
     public CategoryViewHolder(View itemView, OnClickItemListener listener) {

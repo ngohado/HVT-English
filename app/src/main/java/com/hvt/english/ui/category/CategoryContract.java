@@ -2,12 +2,9 @@ package com.hvt.english.ui.category;
 
 import com.hvt.english.model.Category;
 import com.hvt.english.ui.base.BaseView;
+import com.hvt.english.ui.base.IBasePresenter;
 
 import java.util.List;
-
-/**
- * Created by Hado on 7/18/17.
- */
 
 public interface CategoryContract {
 
@@ -17,10 +14,10 @@ public interface CategoryContract {
         void openDetailCategoryUI(int categoryID);
     }
 
-    interface Presenter {
+    interface Presenter extends IBasePresenter<View> {
         void loadCategories();
 
-        void clickCategory(int position);
+        void chooseCategory(int position);
     }
 
 }

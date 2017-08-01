@@ -19,10 +19,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-/**
- * Created by doannh on 7/20/17.
- */
-
 public class SectionCardFragment extends BaseFragment implements SectionCardContract.View {
 
     public enum CardType {

@@ -13,10 +13,6 @@ import com.hvt.english.ui.category.adapter.viewholder.CategoryViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Hado on 7/13/17.
- */
-
 public class CategoryAdapter extends BaseAdapter<CategoryViewHolder> {
 
     private OnClickItemListener listener;

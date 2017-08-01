@@ -15,15 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".ui.main.MainActivity">
 
-        </activity>
         <activity android:name=".ui.exam.main.ExamActivity" />
-        <activity android:name=".ui.categorydetail.DetailActivity" />
-        <activity android:name=".ui.study.StudyActivity">
 
-        </activity>
-        <activity android:name=".ui.realexam.RealExamActivity">
+        <activity android:name=".ui.study.StudyActivity" />
+
+        <activity android:name=".ui.realexam.RealExamActivity" />
+
+        <activity android:name=".ui.categorydetail.CategoryDetailActivity" />
+
+        <activity android:name=".ui.category.CategoryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
