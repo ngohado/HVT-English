@@ -58,7 +58,29 @@ public class DataManager {
     }
 
     public int getStreakDay() {
-        return 0;
+        createToday();
+        List<StreakTable> streaks = new Select().from(StreakTable.class).where("points >= goals").orderBy("day DESC").execute();
+        int streakDays = 0;
+        for (int i = 0; i < streaks.size(); i++) {
+            if ((i == 0 && streaks.get(0).completeGoals()) || (i == 1 && streaks.get(1).completeGoals())) {
+                streakDays++;
+            } else if (i > 1 && streaks.get(i).completeGoals() && streaks.get(i - 1).completeGoals()) {
+                streakDays++;
+            } else break;
+
+        }
+        return streakDays;
+    }
+
+    private void createToday() {
+        StreakTable streakToday = new Select().from(StreakTable.class).where("day = ?", TimeUtil.generateStringTime()).executeSingle();
+        if (streakToday == null) {
+            streakToday = new StreakTable();
+            streakToday.day = TimeUtil.generateStringTime();
+            streakToday.points = 0;
+            streakToday.goals = SharedPrefUtil.getInstance().getGoals();
+            streakToday.save();
+        }
     }
 
     public Observable<Section> getDataSectionRemote(int categoryId) {

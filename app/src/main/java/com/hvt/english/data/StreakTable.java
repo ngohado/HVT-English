@@ -20,4 +20,8 @@ public class StreakTable extends Model {
     @Column(name = "goals")
     public int goals;
 
+    public boolean completeGoals() {
+        return points >= goals;
+    }
+
 }
