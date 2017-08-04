@@ -11,6 +11,16 @@ import com.google.gson.annotations.SerializedName;
 
 public class Category implements Parcelable {
 
+    public Category(int id, String image, String name) {
+        this.id = id;
+        this.image = image;
+        this.name = name;
+    }
+
+    public Category() {
+
+    }
+
     @SerializedName("id")
     public int id;
 
@@ -31,9 +41,6 @@ public class Category implements Parcelable {
         dest.writeInt(this.id);
         dest.writeString(this.image);
         dest.writeString(this.name);
-    }
-
-    public Category() {
     }
 
     protected Category(Parcel in) {

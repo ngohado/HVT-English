@@ -4,12 +4,9 @@ import android.os.Bundle;
 
 import com.hvt.english.Constant;
 import com.hvt.english.model.Meaning;
-import com.hvt.english.model.Sentence;
-import com.hvt.english.model.Word;
 import com.hvt.english.network.ApiClient;
 import com.hvt.english.ui.base.BasePresenter;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -34,19 +31,10 @@ public class ExamPresenter extends BasePresenter<ExamContract.View> implements E
 
     @Override
     public void loadData(Bundle bundle) {
-        ArrayList<Word> words = bundle.getParcelableArrayList(ExamActivity.DATA_WORD_EXAM);
-        ArrayList<Sentence> sentences = bundle.getParcelableArrayList(ExamActivity.DATA_SENTENCE_EXAM);
-        questions = shuffleTwoList(words, sentences);
-    }
-
-    private List<Meaning> shuffleTwoList(ArrayList<Word> words, ArrayList<Sentence> sentences) {
-        List<Meaning> temp = new ArrayList<>();
-        temp.addAll(words);
-        temp.addAll(sentences);
-        Collections.shuffle(temp);
-        getView().updateProgressCount(temp.size());
+        questions = bundle.getParcelableArrayList(ExamActivity.DATA_MEANING_EXAM);
+        Collections.shuffle(questions);
+        getView().updateProgressCount(questions.size());
         nextQuestion();
-        return temp;
     }
 
     @Override

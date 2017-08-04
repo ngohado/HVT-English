@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -25,6 +27,9 @@ public class CategoryDetailActivity extends BaseActivity implements CategoryDeta
 
     @BindView(R.id.iv_category)
     ImageView ivCategory;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     SectionAdapter adapter;
 
@@ -51,6 +56,9 @@ public class CategoryDetailActivity extends BaseActivity implements CategoryDeta
 
     @Override
     public void initView() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         vpSection.setClipToPadding(false);
         vpSection.setPadding(170, 0, 170, 0);
         vpSection.setPageMargin(50);
@@ -77,5 +85,12 @@ public class CategoryDetailActivity extends BaseActivity implements CategoryDeta
     @Override
     public void showCategoryImage(String image) {
         Glide.with(this).load(image).into(ivCategory);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+            onBackPressed();
+        return super.onOptionsItemSelected(item);
     }
 }

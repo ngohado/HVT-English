@@ -21,7 +21,7 @@ import butterknife.OnClick;
  * Created by Hado on 7/13/17.
  */
 
-public class StudyActivity extends BaseActivity implements StudyContract.View, ViewPager.OnPageChangeListener {
+public class StudyActivity extends BaseActivity implements StudyContract.View {
 
     @BindView(R.id.rsv_small)
     RangeSliderView rsvSmall;
@@ -42,7 +42,6 @@ public class StudyActivity extends BaseActivity implements StudyContract.View, V
         vpCards.setClipToPadding(false);
         vpCards.setPadding(100, 0, 100, 0);
         vpCards.setPageMargin(25);
-        vpCards.addOnPageChangeListener(this);
         adapter = new SectionAdapter(getSupportFragmentManager());
         vpCards.setAdapter(adapter);
     }
@@ -111,20 +110,5 @@ public class StudyActivity extends BaseActivity implements StudyContract.View, V
                 showDialogConfirmExit();
                 break;
         }
-    }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        //do nothing
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-        changeCard(position);
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-        //do nothing
     }
 }

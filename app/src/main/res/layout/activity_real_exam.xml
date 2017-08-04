@@ -72,6 +72,7 @@
                 tools:text="you, are, milk, sandwich, rice, they, child" />
 
             <RadioGroup
+                android:id="@+id/group_answer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_question"

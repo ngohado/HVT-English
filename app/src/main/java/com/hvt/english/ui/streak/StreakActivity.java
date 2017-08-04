@@ -31,6 +31,7 @@ public class StreakActivity extends BaseActivity implements StreakContract.View 
         Bundle bundle = new Bundle();
         bundle.putInt(TYPE_DATA, previousScreen);
         bundle.putInt(POINT_DATA, scoreAddition);
+        intent.putExtras(bundle);
         context.startActivity(intent);
     }
 
@@ -99,7 +100,7 @@ public class StreakActivity extends BaseActivity implements StreakContract.View 
 
     @Override
     public void showProgressStreakDay(int day) {
-        pbToday.setTitleString(String.format("%d day streak"));
+        pbToday.setTitleString(String.format("%d day streak", day));
     }
 
     @Override
@@ -109,6 +110,6 @@ public class StreakActivity extends BaseActivity implements StreakContract.View 
 
     @Override
     public void closeStreakScreen() {
-
+        finish();
     }
 }

@@ -12,6 +12,7 @@ import com.hvt.english.ui.study.StudyActivity;
 import com.hvt.english.util.font.StringUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.hvt.english.ui.categorydetail.sectioncard.SectionCardFragment.CARD_TYPE_DATA;
 
@@ -21,12 +22,17 @@ import static com.hvt.english.ui.categorydetail.sectioncard.SectionCardFragment.
 
 public class SectionCardPresenter extends BasePresenter<SectionCardContract.View> implements SectionCardContract.Presenter {
 
+    List<Word> words = new ArrayList<>();
+    List<Sentence> sentences = new ArrayList<>();
+
     public SectionCardPresenter(ApiClient apiClient) {
         super(apiClient);
     }
 
     @Override
     public void loadWord(ArrayList<Word> words) {
+        this.words.clear();
+        this.words.addAll(words);
         getView().showTitle("New words");
         getView().showContent(StringUtils.wordsToString(words));
         getView().showButtonStart("Learn new words");
@@ -34,6 +40,8 @@ public class SectionCardPresenter extends BasePresenter<SectionCardContract.View
 
     @Override
     public void loadSentence(ArrayList<Sentence> sentences) {
+        this.sentences.clear();
+        this.sentences.addAll(sentences);
         getView().showTitle("New sentences");
         getView().showContent(StringUtils.sentencesToString(sentences));
         getView().showButtonStart("Learn new sentences");

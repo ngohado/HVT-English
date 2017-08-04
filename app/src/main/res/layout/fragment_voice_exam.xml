@@ -49,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/btn_speech"
                 android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
                 android:text="Try again?"
                 android:textColor="@android:color/white" />
 
@@ -57,13 +58,14 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_centerInParent="true"
-                android:background="@drawable/speech_selector" />
+                android:background="@drawable/icon_speech" />
 
             <com.hvt.english.widget.CustomFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/btn_speech"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
                 android:text="Tap on mic to speak" />
 
             <com.hvt.english.widget.CustomFontButton

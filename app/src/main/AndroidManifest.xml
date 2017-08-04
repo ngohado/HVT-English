@@ -22,15 +22,19 @@
 
         <activity android:name=".ui.realexam.RealExamActivity" />
 
-        <activity android:name=".ui.categorydetail.CategoryDetailActivity" />
+        <activity
+            android:name=".ui.categorydetail.CategoryDetailActivity"
+            android:theme="@style/DetailScreen" />
 
-        <activity android:name=".ui.category.CategoryActivity">
+        <activity android:name=".ui.category.CategoryActivity"
+            android:theme="@style/MainActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.streak.StreakActivity" />
 
         <meta-data
             android:name="AA_DB_NAME"

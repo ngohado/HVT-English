@@ -12,17 +12,17 @@ import com.hvt.english.ui.exam.ContinueQuestionListener;
 import com.hvt.english.ui.exam.listen.ListenExamFragment;
 import com.hvt.english.ui.exam.voice.VoiceExamFragment;
 import com.hvt.english.ui.streak.StreakActivity;
+import com.hvt.english.util.DialogUtils;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 
 public class ExamActivity extends BaseActivity implements ExamContract.View, ContinueQuestionListener {
 
     public static final String DATA_MEANING = "DATA_MEANING";
 
-    public static final String DATA_WORD_EXAM = "DATA_WORD_EXAM";
-
-    public static final String DATA_SENTENCE_EXAM = "DATA_SENTENCE_EXAM";
+    public static final String DATA_MEANING_EXAM = "CARD_SECTION_DATA";
 
     ExamContract.Presenter presenter;
 
@@ -59,12 +59,16 @@ public class ExamActivity extends BaseActivity implements ExamContract.View, Con
 
     @Override
     public void showVoiceQuestion(Meaning question) {
-        changeFragment(VoiceExamFragment.newInstance(question));
+        VoiceExamFragment fragment = VoiceExamFragment.newInstance(question);
+        fragment.setContinueQuestionListener(this);
+        changeFragment(fragment);
     }
 
     @Override
     public void showListenQuestion(Meaning question) {
-        changeFragment(ListenExamFragment.newInstance(question));
+        ListenExamFragment fragment = ListenExamFragment.newInstance(question);
+        fragment.setContinueQuestionListener(this);
+        changeFragment(fragment);
     }
 
     private void changeFragment(Fragment fragment) {
@@ -95,8 +99,21 @@ public class ExamActivity extends BaseActivity implements ExamContract.View, Con
     }
 
     @Override
+    public void showDialogConfirmExit() {
+        DialogUtils.showDialog(this, "Exit practice", "You're practicing!! Are you want to exit class?", "Exit", sweetAlertDialog -> {
+            sweetAlertDialog.dismiss();
+            finish();
+        });
+    }
+
+    @Override
     public void resultAnswer(Meaning question, boolean correct) {
         presenter.updateResult(question, correct);
+    }
+
+    @OnClick(R.id.tv_close)
+    public void closeOnClick() {
+        showDialogConfirmExit();
     }
 
     @Override

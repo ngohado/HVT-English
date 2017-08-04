@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rsv="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:rsv="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="24dp">
 
     <LinearLayout
         android:id="@+id/layout_progress"
@@ -22,9 +23,9 @@
 
         <com.github.channguyen.rsv.RangeSliderView
             android:id="@+id/rsv_small"
-            rsv:filledColor="#FB4F08"
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_height="50dp"
+            rsv:filledColor="#FB4F08" />
     </LinearLayout>
 
     <FrameLayout

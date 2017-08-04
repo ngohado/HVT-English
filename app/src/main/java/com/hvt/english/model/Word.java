@@ -11,6 +11,11 @@ public class Word extends Meaning implements Parcelable {
 
     public String image;
 
+    public Word(int id, String content, String meaning, String audio, String image) {
+        super(id, content, meaning, audio);
+        this.image = image;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -21,6 +26,7 @@ public class Word extends Meaning implements Parcelable {
         super.writeToParcel(dest, flags);
         dest.writeString(this.image);
     }
+
 
     public Word() {
     }

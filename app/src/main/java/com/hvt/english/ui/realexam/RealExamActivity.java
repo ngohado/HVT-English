@@ -2,8 +2,10 @@ package com.hvt.english.ui.realexam;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
 import com.github.channguyen.rsv.RangeSliderView;
@@ -55,6 +57,10 @@ public class RealExamActivity extends BaseActivity implements RealExamContract.V
     RelativeLayout layoutContainer;
     @BindView(R.id.btn_submit)
     Button btnSubmit;
+    @BindView(R.id.group_answer)
+    RadioGroup radioGroup;
+
+    Drawable defaultColor;
 
     RealExamContract.Presenter presenter;
 
@@ -79,7 +85,7 @@ public class RealExamActivity extends BaseActivity implements RealExamContract.V
 
     @Override
     public void initView() {
-
+        defaultColor = layoutContainer.getBackground();
     }
 
     @Override
@@ -114,10 +120,14 @@ public class RealExamActivity extends BaseActivity implements RealExamContract.V
     @Override
     public void showResult(boolean correct) {
         layoutContainer.setBackgroundColor(getResources().getColor(correct ? R.color.exam_color_correct : R.color.exam_color_incorrect));
-        Observable.interval(1, TimeUnit.SECONDS)
+        Observable.interval(2, TimeUnit.SECONDS)
                 .take(1)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(count -> presenter.nextQuestion());
+                .subscribe(count -> {
+                    layoutContainer.setBackground(defaultColor);
+                    radioGroup.clearCheck();
+                    presenter.nextQuestion();
+                });
     }
 
     @Override
@@ -134,6 +144,16 @@ public class RealExamActivity extends BaseActivity implements RealExamContract.V
     public void showStreakScreen(int point, int type) {
         finish();
         StreakActivity.navigate(this, type, point);
+    }
+
+    @Override
+    public void updateProgressCount(int maxCount) {
+        rsvSmall.setRangeCount(maxCount);
+    }
+
+    @Override
+    public void updateProgressBar(int current) {
+        rsvSmall.setCurrentIndex(current);
     }
 
     @OnClick({R.id.tv_close, R.id.btn_submit})

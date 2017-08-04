@@ -23,6 +23,6 @@ public class Constant {
 
     public static final int SCORE_STUDY_DEF = 10;
 
-    public static final int TIME_PER_QUESTION = 31;
+    public static final int TIME_PER_QUESTION = 30;
 
 }

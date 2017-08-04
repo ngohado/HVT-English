@@ -16,7 +16,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class DataManager {
+public class DataManager implements IDataManager {
 
     private ApiClient apiClient;
 
@@ -24,18 +24,21 @@ public class DataManager {
         this.apiClient = apiClient;
     }
 
+    @Override
     public Observable<List<Category>> getCategories() {
         return apiClient.getCategories()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    @Override
     public Observable<List<Question>> getQuestion(int categoryID) {
         return apiClient.getQuestions(categoryID)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    @Override
     public int getTodayPoints() {
         StreakTable streakToday = new Select().from(StreakTable.class).where("day = ?", TimeUtil.generateStringTime()).executeSingle();
         if (streakToday != null) {
@@ -44,6 +47,7 @@ public class DataManager {
         return 0;
     }
 
+    @Override
     public void savePoints(int points) {
         StreakTable streakToday = new Select().from(StreakTable.class).where("day = ?", TimeUtil.generateStringTime()).executeSingle();
         if (streakToday == null) {
@@ -57,6 +61,7 @@ public class DataManager {
         streakToday.save();
     }
 
+    @Override
     public int getStreakDay() {
         createToday();
         List<StreakTable> streaks = new Select().from(StreakTable.class).where("points >= goals").orderBy("day DESC").execute();
@@ -83,18 +88,21 @@ public class DataManager {
         }
     }
 
+    @Override
     public Observable<Section> getDataSectionRemote(int categoryId) {
         return Observable.zip(apiClient.getWords(categoryId), apiClient.getSentences(categoryId), Section::new)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    @Override
     public Observable<List<Word>> getWordsRemote(int categoryId) {
         return apiClient.getWords(categoryId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    @Override
     public Observable<List<Sentence>> getSentencesRemote(int categoryId) {
         return apiClient.getSentences(categoryId)
                 .subscribeOn(Schedulers.io())

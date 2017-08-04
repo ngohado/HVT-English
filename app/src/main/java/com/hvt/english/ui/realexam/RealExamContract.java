@@ -19,6 +19,10 @@ public interface RealExamContract {
         void updateRemain(long count, String remainingString);
 
         void showStreakScreen(int point, int type);
+
+        void updateProgressCount(int maxCount);
+
+        void updateProgressBar(int current);
     }
 
     interface Presenter extends IBasePresenter<View> {

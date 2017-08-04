@@ -2,6 +2,7 @@ package com.hvt.english.ui.category;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import com.hvt.english.MyApplication;
 import com.hvt.english.R;
@@ -23,9 +24,13 @@ public class CategoryActivity extends BaseActivity implements OnClickItemListene
 
     @BindView(R.id.rv_category)
     RecyclerView rvCategories;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
 
     @Override
     public void initView() {
+        setSupportActionBar(toolbar);
         rvCategories.setLayoutManager(new GridLayoutManager(this, 3));
         rvCategories.setAdapter(mCategoryAdapter);
         mCategoryAdapter.setOnClickItemListener(this);

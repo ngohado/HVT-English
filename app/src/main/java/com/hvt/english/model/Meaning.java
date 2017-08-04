@@ -8,6 +8,7 @@ import android.os.Parcelable;
  */
 
 public class Meaning implements Parcelable {
+
     public int id;
 
     public String content;
@@ -18,6 +19,12 @@ public class Meaning implements Parcelable {
 
     public boolean correct = false;
 
+    public Meaning(int id, String content, String meaning, String audio) {
+        this.id = id;
+        this.content = content;
+        this.meaning = meaning;
+        this.audio = audio;
+    }
 
     @Override
     public int describeContents() {

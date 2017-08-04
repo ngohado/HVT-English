@@ -1,19 +1,20 @@
 package com.hvt.english.ui.base;
 
 
-import com.hvt.english.data.DataManager;
+import com.hvt.english.data.FakeDataManager;
+import com.hvt.english.data.IDataManager;
 import com.hvt.english.network.ApiClient;
 
 import io.reactivex.disposables.CompositeDisposable;
 
 public abstract class BasePresenter<V extends BaseView> implements IBasePresenter<V> {
 
-    protected DataManager dataManager;
+    protected IDataManager dataManager;
 
     protected CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public BasePresenter(ApiClient apiClient) {
-        dataManager = new DataManager(apiClient);
+        dataManager = new FakeDataManager();
     }
 
     private V baseView;

@@ -2,6 +2,7 @@ package com.hvt.english.ui.study.card;
 
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -55,7 +56,7 @@ public class CardFragment extends BaseFragment implements CardContract.View {
     public static CardFragment newInstance(Sentence data) {
         CardFragment fragment = new CardFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt(SectionCardFragment.CARD_TYPE_DATA, SectionCardFragment.CardType.WORD.ordinal());
+        bundle.putInt(SectionCardFragment.CARD_TYPE_DATA, SectionCardFragment.CardType.SENTENCE.ordinal());
         bundle.putParcelable(MEANING_DATA, data);
         fragment.setArguments(bundle);
         return fragment;
@@ -121,6 +122,6 @@ public class CardFragment extends BaseFragment implements CardContract.View {
 
     @Override
     public void configTextContentSize(int size) {
-        tvContent.setTextSize(getResources().getDimension(size));
+        tvContent.setTextSize(TypedValue.COMPLEX_UNIT_SP, size);
     }
 }

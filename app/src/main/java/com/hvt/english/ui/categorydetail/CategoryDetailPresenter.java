@@ -25,12 +25,14 @@ public class CategoryDetailPresenter extends BasePresenter<CategoryDetailContrac
                 })
                 .doFinally(() -> getView().hideLoading())
                 .subscribe(section -> {
-                    //TODO: Show category image
+                    getView().showCategoryImage("");
 
                     List<Fragment> fragments = new ArrayList<>();
                     fragments.add(SectionCardFragment.newInstance(section, SectionCardFragment.CardType.WORD));
                     fragments.add(SectionCardFragment.newInstance(section, SectionCardFragment.CardType.SENTENCE));
-                    fragments.add(SectionCardFragment.newInstance(section, SectionCardFragment.CardType.PRACTICE));
+                    SectionCardFragment sectionCardFragment = SectionCardFragment.newInstance(section, SectionCardFragment.CardType.PRACTICE);
+                    sectionCardFragment.getArguments().putInt(SectionCardFragment.CARD_CATEGORY_DATA, categoryId);
+                    fragments.add(sectionCardFragment);
                     fragments.add(SectionCardFragment.newInstance(section, SectionCardFragment.CardType.TEST));
                     getView().showSections(fragments);
                 });

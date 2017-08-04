@@ -2,7 +2,6 @@ package com.hvt.english.ui.study.card;
 
 import android.os.Bundle;
 
-import com.hvt.english.R;
 import com.hvt.english.model.Sentence;
 import com.hvt.english.model.Word;
 import com.hvt.english.network.ApiClient;
@@ -26,13 +25,13 @@ public class CardPresenter extends BasePresenter<CardContract.View> implements C
         int cardType = data.getInt(CARD_TYPE_DATA);
         if (cardType == SectionCardFragment.CardType.WORD.ordinal()) {
             Word word = data.getParcelable(CardFragment.MEANING_DATA);
-            getView().configTextContentSize(R.dimen.card_text_content_word_size);
+            getView().configTextContentSize(30);
             getView().showImage(true, word.image);
             getView().showStudyContent(word);
             getView().showSound(word.audio != null);
         } else if (cardType == SectionCardFragment.CardType.SENTENCE.ordinal()) {
             Sentence sentence = data.getParcelable(CardFragment.MEANING_DATA);
-            getView().configTextContentSize(R.dimen.card_text_content_sentence_size);
+            getView().configTextContentSize(25);
             getView().showStudyContent(sentence);
             getView().showImage(false, null);
             getView().showSound(sentence.audio != null);

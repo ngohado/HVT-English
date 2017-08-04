@@ -23,6 +23,8 @@ public interface ExamContract {
         void updateProgressCount(int maxCount);
 
         void showGoalToday(int scoreArchive);
+
+        void showDialogConfirmExit();
     }
 
     interface Presenter extends IBasePresenter<View> {

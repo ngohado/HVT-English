@@ -6,13 +6,16 @@ import android.view.View;
 import android.widget.Button;
 
 import com.hvt.english.R;
+import com.hvt.english.model.Meaning;
 import com.hvt.english.model.Section;
 import com.hvt.english.model.Sentence;
 import com.hvt.english.model.Word;
 import com.hvt.english.ui.base.BaseFragment;
+import com.hvt.english.ui.realexam.RealExamActivity;
 import com.hvt.english.widget.CustomFontTextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +33,7 @@ public class SectionCardFragment extends BaseFragment implements SectionCardCont
 
     public static final String CARD_TYPE_DATA = "CARD_TYPE_DATA";
     public static final String CARD_SECTION_DATA = "CARD_SECTION_DATA";
+    public static final String CARD_CATEGORY_DATA = "CARD_CATEGORY_DATA";
 
     @BindView(R.id.tv_state)
     CustomFontTextView tvState;
@@ -55,6 +59,19 @@ public class SectionCardFragment extends BaseFragment implements SectionCardCont
             ArrayList<Sentence> sentences = new ArrayList<>();
             sentences.addAll(section.sentences);
             bundle.putParcelableArrayList(CARD_SECTION_DATA, sentences);
+        } else if (type.ordinal() == CardType.PRACTICE.ordinal()) {
+            Collections.shuffle(section.words);
+            Collections.shuffle(section.sentences);
+
+            ArrayList<Word> halfWords = new ArrayList<>();
+            halfWords.addAll(section.words.subList(0, section.words.size() / 2));
+
+            ArrayList<Sentence> halfSentences = new ArrayList<>();
+            halfSentences.addAll(section.sentences.subList(0, section.sentences.size() / 2));
+            ArrayList<Meaning> data = new ArrayList<>();
+            data.addAll(halfWords);
+            data.addAll(halfSentences);
+            bundle.putParcelableArrayList(CARD_SECTION_DATA, data);
         }
 
         fragment.setArguments(bundle);
@@ -113,6 +130,10 @@ public class SectionCardFragment extends BaseFragment implements SectionCardCont
 
     @Override
     public void openNewScreenCorresponding(Class clazz, Bundle bundle) {
+        if (clazz == null) {
+            RealExamActivity.navigate(getContext(), bundle.getInt(CARD_CATEGORY_DATA));
+            return;
+        }
         Intent intent = new Intent(getContext(), clazz);
         intent.putExtras(bundle);
         startActivity(intent);

@@ -40,6 +40,7 @@ public class RealExamPresenter extends BasePresenter<RealExamContract.View> impl
                 .doFinally(() -> getView().hideLoading())
                 .subscribe(questions -> {
                     this.questions = questions;
+                    getView().updateProgressCount(questions.size());
                     getView().showQuestion(questions.get(currentQuestion));
                 }, error -> getView().showError(error.getMessage()));
     }
@@ -48,6 +49,7 @@ public class RealExamPresenter extends BasePresenter<RealExamContract.View> impl
     public void nextQuestion() {
         currentQuestion++;
         if (currentQuestion < questions.size()) {
+            getView().updateProgressBar(currentQuestion);
             getView().showQuestion(questions.get(currentQuestion));
         } else {
             dataManager.savePoints(currentPoint);

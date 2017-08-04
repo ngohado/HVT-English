@@ -11,6 +11,9 @@ public class Section {
     public List<Word> words;
     public List<Sentence> sentences;
 
+    public Section() {
+    }
+
     public Section(List<Word> words, List<Sentence> sentences) {
         this.words = words;
         this.sentences = sentences;

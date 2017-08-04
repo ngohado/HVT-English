@@ -8,7 +8,13 @@ import android.os.Parcelable;
  */
 
 public class Sentence extends Meaning implements Parcelable {
+
     public String describe;
+
+    public Sentence(int id, String content, String meaning, String audio, String describe) {
+        super(id, content, meaning, audio);
+        this.describe = describe;
+    }
 
     @Override
     public int describeContents() {
