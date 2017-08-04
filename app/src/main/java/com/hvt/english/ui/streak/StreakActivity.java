@@ -51,7 +51,7 @@ public class StreakActivity extends BaseActivity implements StreakContract.View 
 
     @Override
     public void initView() {
-        pbToday.setCurrentValues(70, 1000);
+
     }
 
     @Override

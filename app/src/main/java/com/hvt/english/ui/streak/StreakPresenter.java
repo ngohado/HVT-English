@@ -35,8 +35,8 @@ public class StreakPresenter extends BasePresenter<StreakContract.View> implemen
             getView().showResultTitle(R.string.streak_title_study_complete);
         }
 
-        float percent = Math.round(todayPoint / SharedPrefUtil.getInstance().getInt(Constant.GOALS_SCORE_DATA));
-        getView().showProgressGoals(Math.min(percent, 100), todayPoint);
+        float percent = todayPoint * 1f / SharedPrefUtil.getInstance().getInt(Constant.GOALS_SCORE_DATA) * 1f;
+        getView().showProgressGoals(Math.min(percent * 100, 100), todayPoint);
 
         int streakDay = dataManager.getStreakDay();
         getView().showProgressStreakDay(streakDay);
