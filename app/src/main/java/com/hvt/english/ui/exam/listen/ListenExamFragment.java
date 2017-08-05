@@ -110,8 +110,20 @@ public class ListenExamFragment extends BaseFragment implements ListenExamContra
     }
 
     @Override
+    public void showPlaySound(boolean show) {
+        ivSound.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
+    }
+
+    @Override
     public void showQuestionPractice(Meaning meaning) {
         tvContent.setText(meaning.content);
+    }
+
+    @Override
+    public void showMeaningOfSentence(String meaning) {
+        tvContent.setText(meaning);
+        tvContent.setVisibility(View.VISIBLE);
+        ivIdea.setVisibility(View.INVISIBLE);
     }
 
     @Override

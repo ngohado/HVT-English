@@ -117,6 +117,21 @@ public class VoiceExamFragment extends BaseFragment implements VoiceExamContract
 
 
     @Override
+    public void showPlaySound(boolean show) {
+        ivSound.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
+    }
+
+    @Override
+    public void showIdea(boolean show) {
+        ivIdea.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
+    }
+
+    @Override
+    public void showContent(boolean show) {
+        tvContent.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
+    }
+
+    @Override
     public void showQuestionPractice(Meaning meaning) {
         tvContent.setText(meaning.content);
     }

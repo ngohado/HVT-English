@@ -79,7 +79,7 @@ public class ExamActivity extends BaseActivity implements ExamContract.View, Con
 
     @Override
     public void updateProgressBar(int current) {
-        rsvSmall.setCurrentIndex(current);
+        rsvSmall.setCurrentIndex(current - 1);
     }
 
     @Override

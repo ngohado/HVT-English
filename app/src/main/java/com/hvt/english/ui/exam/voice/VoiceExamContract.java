@@ -14,6 +14,12 @@ import java.util.ArrayList;
 
 public interface VoiceExamContract {
     interface View extends BaseExamView {
+        void showPlaySound(boolean show);
+
+        void showIdea(boolean show);
+
+        void showContent(boolean show);
+
         void showQuestionPractice(Meaning meaning);
 
         void showGoogleRecognizeSpeech();

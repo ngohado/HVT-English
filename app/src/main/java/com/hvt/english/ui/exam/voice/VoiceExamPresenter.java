@@ -25,6 +25,15 @@ public class VoiceExamPresenter extends BasePresenter<VoiceExamContract.View> im
     public void loadQuestionPractice(Bundle data) {
         Meaning question = data.getParcelable(ExamActivity.DATA_MEANING);
         this.question = question;
+        if (question.audio == null || question.audio.isEmpty()) {
+            getView().showPlaySound(false);
+            getView().showIdea(false);
+            getView().showContent(true);
+        } else {
+            getView().showPlaySound(true);
+            getView().showIdea(true);
+            getView().showContent(false);
+        }
         getView().showQuestionPractice(question);
     }
 

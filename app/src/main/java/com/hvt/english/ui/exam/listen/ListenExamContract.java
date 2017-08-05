@@ -13,7 +13,11 @@ import com.hvt.english.ui.exam.BaseExamView;
 public interface ListenExamContract {
 
     interface View extends BaseExamView {
+        void showPlaySound(boolean show);
+
         void showQuestionPractice(Meaning meaning);
+
+        void showMeaningOfSentence(String meaning);
 
         void playSound(String url);
     }
