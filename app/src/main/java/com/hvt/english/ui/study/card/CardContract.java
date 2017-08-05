@@ -19,10 +19,14 @@ public interface CardContract {
         void showImage(boolean show, String url);
 
         void configTextContentSize(int size);
+
+        void playSound(String url);
     }
 
     interface Presenter extends IBasePresenter<View> {
         void loadData(Bundle data);
+
+        void clickPlaySound();
     }
 
 }

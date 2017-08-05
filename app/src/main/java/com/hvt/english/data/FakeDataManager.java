@@ -64,26 +64,26 @@ public class FakeDataManager implements IDataManager {
     @Override
     public Observable<Section> getDataSectionRemote(int categoryId) {
         List<Word> words = new ArrayList<>();
-        words.add(new Word(1, "Hello", "Xin chao", "", ""));
-        words.add(new Word(1, "Hello", "Xin chao", "", ""));
-        words.add(new Word(1, "Hello", "Xin chao", "", ""));
-        words.add(new Word(1, "Hello", "Xin chao", "", ""));
-        words.add(new Word(1, "Hello", "Xin chao", "", ""));
-        words.add(new Word(1, "Hello", "Xin chao", "", ""));
-        words.add(new Word(1, "Hello", "Xin chao", "", ""));
-        words.add(new Word(1, "Hello", "Xin chao", "", ""));
-        words.add(new Word(1, "Hello", "Xin chao", "", ""));
+        words.add(new Word(1, "Hello", "Xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
+        words.add(new Word(1, "Hello", "Xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
+        words.add(new Word(1, "Hello", "Xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
+        words.add(new Word(1, "Hello", "Xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
+        words.add(new Word(1, "Hello", "Xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
+        words.add(new Word(1, "Hello", "Xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
+        words.add(new Word(1, "Hello", "Xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
+        words.add(new Word(1, "Hello", "Xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
+        words.add(new Word(1, "Hello", "Xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
         List<Sentence> sentences = new ArrayList<>();
-        sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "", ""));
-        sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "", ""));
-        sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "", ""));
-        sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "", ""));
-        sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "", ""));
-        sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "", ""));
-        sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "", ""));
-        sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "", ""));
-        sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "", ""));
-        sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "", ""));
+        sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
+        sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
+        sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
+        sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
+        sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
+        sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
+        sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
+        sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
+        sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
+        sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
         return Observable.just(new Section(words, sentences));
     }
 

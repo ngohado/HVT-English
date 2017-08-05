@@ -14,6 +14,8 @@ public interface ListenExamContract {
 
     interface View extends BaseExamView {
         void showQuestionPractice(Meaning meaning);
+
+        void playSound(String url);
     }
 
     interface Presenter extends IBasePresenter<View> {

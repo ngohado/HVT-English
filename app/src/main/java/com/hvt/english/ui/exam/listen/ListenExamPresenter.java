@@ -36,6 +36,6 @@ public class ListenExamPresenter extends BasePresenter<ListenExamContract.View> 
 
     @Override
     public void clickSound() {
-
+        getView().playSound(question.audio);
     }
 }

@@ -14,6 +14,7 @@ import com.hvt.english.model.Sentence;
 import com.hvt.english.model.Word;
 import com.hvt.english.ui.base.BaseFragment;
 import com.hvt.english.ui.categorydetail.sectioncard.SectionCardFragment;
+import com.hvt.english.util.SoundUtils;
 import com.hvt.english.widget.CustomFontTextView;
 
 import butterknife.BindView;
@@ -98,7 +99,8 @@ public class CardFragment extends BaseFragment implements CardContract.View {
 
     @OnClick(R.id.iv_sound)
     public void onViewClicked() {
-
+        ivSound.setEnabled(false);
+        presenter.clickPlaySound();
     }
 
     @Override
@@ -123,5 +125,12 @@ public class CardFragment extends BaseFragment implements CardContract.View {
     @Override
     public void configTextContentSize(int size) {
         tvContent.setTextSize(TypedValue.COMPLEX_UNIT_SP, size);
+    }
+
+    @Override
+    public void playSound(String url) {
+        SoundUtils.playSound(getContext(), url, () -> {
+            ivSound.setEnabled(true);
+        });
     }
 }

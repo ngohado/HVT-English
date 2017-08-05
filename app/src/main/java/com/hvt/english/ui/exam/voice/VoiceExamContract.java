@@ -17,6 +17,8 @@ public interface VoiceExamContract {
         void showQuestionPractice(Meaning meaning);
 
         void showGoogleRecognizeSpeech();
+
+        void playSound(String url);
     }
 
     interface Presenter extends IBasePresenter<View> {

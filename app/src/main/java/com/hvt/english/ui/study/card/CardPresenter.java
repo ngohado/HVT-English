@@ -20,21 +20,30 @@ public class CardPresenter extends BasePresenter<CardContract.View> implements C
         super(apiClient);
     }
 
+    String soundUrl = "";
+
     @Override
     public void loadData(Bundle data) {
         int cardType = data.getInt(CARD_TYPE_DATA);
         if (cardType == SectionCardFragment.CardType.WORD.ordinal()) {
             Word word = data.getParcelable(CardFragment.MEANING_DATA);
+            soundUrl = word.audio;
             getView().configTextContentSize(30);
             getView().showImage(true, word.image);
             getView().showStudyContent(word);
             getView().showSound(word.audio != null);
         } else if (cardType == SectionCardFragment.CardType.SENTENCE.ordinal()) {
             Sentence sentence = data.getParcelable(CardFragment.MEANING_DATA);
+            soundUrl = sentence.audio;
             getView().configTextContentSize(25);
             getView().showStudyContent(sentence);
             getView().showImage(false, null);
             getView().showSound(sentence.audio != null);
         }
+    }
+
+    @Override
+    public void clickPlaySound() {
+        getView().playSound(soundUrl);
     }
 }
