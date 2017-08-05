@@ -17,9 +17,6 @@ import java.util.List;
 import static com.hvt.english.ui.categorydetail.sectioncard.SectionCardFragment.CARD_SECTION_DATA;
 import static com.hvt.english.ui.categorydetail.sectioncard.SectionCardFragment.CARD_TYPE_DATA;
 
-/**
- * Created by Hado on 7/14/17.
- */
 
 public class StudyPresenter extends BasePresenter<StudyContract.View> implements StudyContract.Presenter {
 

@@ -9,9 +9,10 @@ import java.util.List;
 public interface CategoryContract {
 
     interface View extends BaseView {
+
         void showCategories(List<Category> categories);
 
-        void openDetailCategoryUI(int categoryID);
+        void openDetailCategoryUI(int categoryID, String categoryName, String categoryImage);
     }
 
     interface Presenter extends IBasePresenter<View> {

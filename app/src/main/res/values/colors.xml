@@ -8,4 +8,19 @@
     <color name="color3">#FF7900</color>
     <color name="exam_color_correct">#8077C924</color>
     <color name="exam_color_incorrect">#80FE0000</color>
+
+    <color name="background_1">#F2A420</color>
+    <color name="background_2">#7CC60F</color>
+    <color name="background_3">#1FAEF8</color>
+    <color name="background_4">#CB2E30</color>
+    <color name="background_5">#FCDE06</color>
+
+    <array name="detail_background">
+        <item>@color/background_1</item>
+        <item>@color/background_2</item>
+        <item>@color/background_3</item>
+        <item>@color/background_4</item>
+        <item>@color/background_5</item>
+        <item>@color/background_5</item>
+    </array>
 </resources>

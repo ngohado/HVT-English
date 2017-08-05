@@ -9,6 +9,7 @@ import android.os.Parcelable;
 
 public class Sentence extends Meaning implements Parcelable {
 
+
     public String describe;
 
     public Sentence(int id, String content, String meaning, String audio, String describe) {

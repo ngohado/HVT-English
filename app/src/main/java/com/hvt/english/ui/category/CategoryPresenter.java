@@ -34,6 +34,7 @@ public class CategoryPresenter extends BasePresenter<CategoryContract.View> impl
 
     @Override
     public void chooseCategory(int position) {
-        getView().openDetailCategoryUI(categories.get(position).id);
+        Category category = categories.get(position);
+        getView().openDetailCategoryUI(category.id, category.name, category.image);
     }
 }

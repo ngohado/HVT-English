@@ -90,7 +90,7 @@ public class DataManager implements IDataManager {
 
     @Override
     public Observable<Section> getDataSectionRemote(int categoryId) {
-        return Observable.zip(apiClient.getWords(categoryId), apiClient.getSentences(categoryId), Section::new)
+        return apiClient.getSection(categoryId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

@@ -3,12 +3,15 @@ package com.hvt.english.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Hado on 7/15/17.
  */
 
 public class Word extends Meaning implements Parcelable {
 
+    @SerializedName("picture_url")
     public String image;
 
     public Word(int id, String content, String meaning, String audio, String image) {

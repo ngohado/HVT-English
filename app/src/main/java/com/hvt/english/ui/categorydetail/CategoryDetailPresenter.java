@@ -17,7 +17,7 @@ public class CategoryDetailPresenter extends BasePresenter<CategoryDetailContrac
     }
 
     @Override
-    public void loadDataSections(int categoryId) {
+    public void loadDataSections(int categoryId, int color) {
         dataManager.getDataSectionRemote(categoryId)
                 .doOnSubscribe(disposable -> {
                     compositeDisposable.add(disposable);
@@ -25,15 +25,12 @@ public class CategoryDetailPresenter extends BasePresenter<CategoryDetailContrac
                 })
                 .doFinally(() -> getView().hideLoading())
                 .subscribe(section -> {
-                    getView().showCategoryImage("");
-
+                    section.id = categoryId;
                     List<Fragment> fragments = new ArrayList<>();
-                    fragments.add(SectionCardFragment.newInstance(section, SectionCardFragment.CardType.WORD));
-                    fragments.add(SectionCardFragment.newInstance(section, SectionCardFragment.CardType.SENTENCE));
-                    SectionCardFragment sectionCardFragment = SectionCardFragment.newInstance(section, SectionCardFragment.CardType.PRACTICE);
-                    sectionCardFragment.getArguments().putInt(SectionCardFragment.CARD_CATEGORY_DATA, categoryId);
-                    fragments.add(sectionCardFragment);
-                    fragments.add(SectionCardFragment.newInstance(section, SectionCardFragment.CardType.TEST));
+                    fragments.add(SectionCardFragment.newInstance(section, SectionCardFragment.CardType.WORD, color));
+                    fragments.add(SectionCardFragment.newInstance(section, SectionCardFragment.CardType.SENTENCE, color));
+                    fragments.add(SectionCardFragment.newInstance(section, SectionCardFragment.CardType.PRACTICE, color));
+                    fragments.add(SectionCardFragment.newInstance(section, SectionCardFragment.CardType.TEST, color));
                     getView().showSections(fragments);
                 });
     }

@@ -1,5 +1,7 @@
 package com.hvt.english.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -7,8 +9,15 @@ import java.util.List;
  */
 
 public class Section {
+    public int id;
 
+    @SerializedName("background")
+    public String background;
+
+    @SerializedName("words")
     public List<Word> words;
+
+    @SerializedName("sentences")
     public List<Sentence> sentences;
 
     public Section() {

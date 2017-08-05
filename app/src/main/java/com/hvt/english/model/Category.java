@@ -24,10 +24,10 @@ public class Category implements Parcelable {
     @SerializedName("id")
     public int id;
 
-    @SerializedName("image")
+    @SerializedName("background_url")
     public String image;
 
-    @SerializedName("name")
+    @SerializedName("description")
     public String name;
 
 

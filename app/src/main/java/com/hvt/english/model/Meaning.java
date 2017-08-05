@@ -3,18 +3,24 @@ package com.hvt.english.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Hado on 7/18/17.
  */
 
 public class Meaning implements Parcelable {
 
+
     public int id;
 
+    @SerializedName("content")
     public String content;
 
+    @SerializedName("meaning")
     public String meaning;
 
+    @SerializedName("audio")
     public String audio;
 
     public boolean correct = false;

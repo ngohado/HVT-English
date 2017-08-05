@@ -1,7 +1,7 @@
 package com.hvt.english.ui.base;
 
 
-import com.hvt.english.data.FakeDataManager;
+import com.hvt.english.data.DataManager;
 import com.hvt.english.data.IDataManager;
 import com.hvt.english.network.ApiClient;
 
@@ -14,7 +14,7 @@ public abstract class BasePresenter<V extends BaseView> implements IBasePresente
     protected CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public BasePresenter(ApiClient apiClient) {
-        dataManager = new FakeDataManager();
+        dataManager = new DataManager(apiClient);
     }
 
     private V baseView;

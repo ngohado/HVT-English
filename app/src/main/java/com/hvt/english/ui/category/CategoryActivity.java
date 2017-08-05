@@ -28,6 +28,7 @@ public class CategoryActivity extends BaseActivity implements OnClickItemListene
     Toolbar toolbar;
 
 
+
     @Override
     public void initView() {
         setSupportActionBar(toolbar);
@@ -57,8 +58,9 @@ public class CategoryActivity extends BaseActivity implements OnClickItemListene
     }
 
     @Override
-    public void openDetailCategoryUI(int categoryID) {
-        CategoryDetailActivity.navigate(this, categoryID);
+    public void openDetailCategoryUI(int categoryID, String categoryName, String categoryImage) {
+        CategoryDetailActivity.navigate(this, categoryID, categoryName, categoryImage);
+
     }
 
     @Override

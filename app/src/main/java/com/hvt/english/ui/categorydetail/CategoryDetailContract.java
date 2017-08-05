@@ -14,9 +14,11 @@ public interface CategoryDetailContract {
         void showSections(List<Fragment> sections);
 
         void showCategoryImage(String image);
+
+        void showTitleCategory(String title);
     }
 
     interface Presenter extends IBasePresenter<View> {
-        void loadDataSections(int categoryId);
+        void loadDataSections(int categoryId, int color);
     }
 }

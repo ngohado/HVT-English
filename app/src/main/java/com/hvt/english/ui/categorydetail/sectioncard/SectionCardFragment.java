@@ -34,6 +34,7 @@ public class SectionCardFragment extends BaseFragment implements SectionCardCont
     public static final String CARD_TYPE_DATA = "CARD_TYPE_DATA";
     public static final String CARD_SECTION_DATA = "CARD_SECTION_DATA";
     public static final String CARD_CATEGORY_DATA = "CARD_CATEGORY_DATA";
+    public static final String CARD_COLOR_DATA = "CARD_COLOR_DATA";
 
     @BindView(R.id.tv_state)
     CustomFontTextView tvState;
@@ -46,10 +47,12 @@ public class SectionCardFragment extends BaseFragment implements SectionCardCont
 
     SectionCardContract.Presenter presenter;
 
-    public static SectionCardFragment newInstance(Section section, CardType type) {
+    public static SectionCardFragment newInstance(Section section, CardType type, int color) {
         SectionCardFragment fragment = new SectionCardFragment();
         Bundle bundle = new Bundle();
+        bundle.putInt(CARD_COLOR_DATA, color);
         bundle.putInt(CARD_TYPE_DATA, type.ordinal());
+        bundle.putInt(CARD_CATEGORY_DATA, section.id);
 
         if (type.ordinal() == CardType.WORD.ordinal()) {
             ArrayList<Word> words = new ArrayList<>();
@@ -94,7 +97,8 @@ public class SectionCardFragment extends BaseFragment implements SectionCardCont
 
     @Override
     public void initView() {
-
+        int color = getArguments().getInt(CARD_COLOR_DATA);
+        btnStart.setBackgroundColor(color);
     }
 
     @Override

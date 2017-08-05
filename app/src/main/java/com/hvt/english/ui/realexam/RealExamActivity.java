@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
@@ -26,10 +27,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-
-/**
- * Created by Hado on 7/18/17.
- */
 
 public class RealExamActivity extends BaseActivity implements RealExamContract.View {
 
@@ -59,6 +56,9 @@ public class RealExamActivity extends BaseActivity implements RealExamContract.V
     Button btnSubmit;
     @BindView(R.id.group_answer)
     RadioGroup radioGroup;
+
+    @BindView(R.id.iv_word)
+    ImageView ivQuestion;
 
     Drawable defaultColor;
 
@@ -104,16 +104,16 @@ public class RealExamActivity extends BaseActivity implements RealExamContract.V
         btnSubmit.setEnabled(true);
         StringUtils.setText(tvQuestion, question.question);
 
-        rdbAnswerA.setTag(question.answerA);
-        rdbAnswerB.setTag(question.answerB);
-        rdbAnswerC.setTag(question.answerC);
-        rdbAnswerD.setTag(question.answerD);
+        rdbAnswerA.setTag(question.getAnswerA());
+        rdbAnswerB.setTag(question.getAnswerB());
+        rdbAnswerC.setTag(question.getAnswerC());
+        rdbAnswerD.setTag(question.getAnswerD());
 
-        StringUtils.setText(rdbAnswerA, question.answerA.content);
-        StringUtils.setText(rdbAnswerB, question.answerB.content);
-        StringUtils.setText(rdbAnswerC, question.answerC.content);
-        StringUtils.setText(rdbAnswerD, question.answerD.content);
-        StringUtils.setText(tvSecond, String.valueOf(Constant.TIME_PER_QUESTION));
+        StringUtils.setText(rdbAnswerA, question.getAnswerA().content);
+        StringUtils.setText(rdbAnswerB, question.getAnswerB().content);
+        StringUtils.setText(rdbAnswerC, question.getAnswerC().content);
+        StringUtils.setText(rdbAnswerD, question.getAnswerD().content);
+        StringUtils.setText(tvSecond, String.valueOf(Constant.TIME_PER_QUESTION - 1));
         presenter.startCountDown();
     }
 
@@ -135,8 +135,20 @@ public class RealExamActivity extends BaseActivity implements RealExamContract.V
         StringUtils.setText(tvSecond, String.valueOf(count));
         StringUtils.setText(tvRemaining, remainString);
         if (count == 0) {
+            Answer answer;
+            if (rdbAnswerA.isChecked()) {
+                answer = (Answer) rdbAnswerA.getTag();
+            } else if (rdbAnswerB.isChecked()) {
+                answer = (Answer) rdbAnswerB.getTag();
+            } else if (rdbAnswerC.isChecked()) {
+                answer = (Answer) rdbAnswerC.getTag();
+            } else if (rdbAnswerD.isChecked()) {
+                answer = (Answer) rdbAnswerD.getTag();
+            } else {
+                answer = null;
+            }
             btnSubmit.setEnabled(false);
-            presenter.submitAnswer(null);
+            presenter.submitAnswer(answer);
         }
     }
 

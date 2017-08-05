@@ -2,11 +2,14 @@ package com.hvt.english.ui.categorydetail;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.hvt.english.MyApplication;
@@ -15,12 +18,15 @@ import com.hvt.english.ui.base.BaseActivity;
 import com.hvt.english.ui.categorydetail.adapter.SectionAdapter;
 
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 
 public class CategoryDetailActivity extends BaseActivity implements CategoryDetailContract.View {
 
     public static final String CATEGORY_ID_DATA = "CATEGORY_ID_DATA";
+    public static final String CATEGORY_NAME_DATA = "CATEGORY_NAME_DATA";
+    public static final String CATEGORY_IMAGE_DATA = "CATEGORY_IMAGE_DATA";
 
     @BindView(R.id.vp_section)
     ViewPager vpSection;
@@ -31,13 +37,20 @@ public class CategoryDetailActivity extends BaseActivity implements CategoryDeta
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    @BindView(R.id.container)
+    RelativeLayout container;
+
+    int mainColor;
+
     SectionAdapter adapter;
 
     CategoryDetailContract.Presenter presenter;
 
-    public static void navigate(Context context, int categoryID) {
+    public static void navigate(Context context, int categoryID, String name, String image) {
         Intent intent = new Intent(context, CategoryDetailActivity.class);
         intent.putExtra(CATEGORY_ID_DATA, categoryID);
+        intent.putExtra(CATEGORY_NAME_DATA, name);
+        intent.putExtra(CATEGORY_IMAGE_DATA, image);
         context.startActivity(intent);
     }
 
@@ -59,16 +72,28 @@ public class CategoryDetailActivity extends BaseActivity implements CategoryDeta
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_material);
+        getSupportActionBar().setHomeAsUpIndicator(upArrow);
+
         vpSection.setClipToPadding(false);
         vpSection.setPadding(170, 0, 170, 0);
         vpSection.setPageMargin(50);
         adapter = new SectionAdapter(getSupportFragmentManager());
         vpSection.setAdapter(adapter);
+
+        int[] colorsBackground = getResources().getIntArray(R.array.detail_background);
+        mainColor = colorsBackground[new Random().nextInt(colorsBackground.length - 1)];
+        container.setBackgroundColor(mainColor);
     }
 
     @Override
     public void initData() {
-        presenter.loadDataSections(getIntent().getIntExtra(CATEGORY_ID_DATA, 0));
+        Intent intent = getIntent();
+        String name = intent.getStringExtra(CATEGORY_NAME_DATA);
+        showTitleCategory(name);
+        String image = intent.getStringExtra(CATEGORY_IMAGE_DATA);
+        showCategoryImage(image);
+        presenter.loadDataSections(getIntent().getIntExtra(CATEGORY_ID_DATA, 0), mainColor);
     }
 
     @Override
@@ -85,6 +110,12 @@ public class CategoryDetailActivity extends BaseActivity implements CategoryDeta
     @Override
     public void showCategoryImage(String image) {
         Glide.with(this).load(image).into(ivCategory);
+    }
+
+    @Override
+    public void showTitleCategory(String title) {
+        toolbar.setTitleTextColor(Color.WHITE);
+        getSupportActionBar().setTitle(title);
     }
 
     @Override
