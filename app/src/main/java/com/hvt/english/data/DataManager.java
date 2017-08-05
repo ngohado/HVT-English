@@ -4,8 +4,6 @@ import com.activeandroid.query.Select;
 import com.hvt.english.model.Category;
 import com.hvt.english.model.Question;
 import com.hvt.english.model.Section;
-import com.hvt.english.model.Sentence;
-import com.hvt.english.model.Word;
 import com.hvt.english.network.ApiClient;
 import com.hvt.english.util.SharedPrefUtil;
 import com.hvt.english.util.TimeUtil;
@@ -34,6 +32,7 @@ public class DataManager implements IDataManager {
     @Override
     public Observable<List<Question>> getQuestion(int categoryID) {
         return apiClient.getQuestions(categoryID)
+                .map(questionResponse -> questionResponse.questions)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -91,20 +90,6 @@ public class DataManager implements IDataManager {
     @Override
     public Observable<Section> getDataSectionRemote(int categoryId) {
         return apiClient.getSection(categoryId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-    }
-
-    @Override
-    public Observable<List<Word>> getWordsRemote(int categoryId) {
-        return apiClient.getWords(categoryId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-    }
-
-    @Override
-    public Observable<List<Sentence>> getSentencesRemote(int categoryId) {
-        return apiClient.getSentences(categoryId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

@@ -11,8 +11,6 @@ public class Constant {
 
     public static final String EN = "en";
 
-    public static final String VI = "vi";
-
     public static final int SCORE_PER_QUESTION_PRACTICE_DEF = 25;
 
     public static final int SCORE_PER_QUESTION_EXAM_DEF = 30;

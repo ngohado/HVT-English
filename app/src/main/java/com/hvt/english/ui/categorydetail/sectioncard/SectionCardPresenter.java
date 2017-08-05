@@ -66,18 +66,13 @@ public class SectionCardPresenter extends BasePresenter<SectionCardContract.View
         int cardType = argument.getInt(CARD_TYPE_DATA);
 
         Class clazz = null;
-        Bundle bundle = new Bundle();
 
         if (cardType == SectionCardFragment.CardType.WORD.ordinal()
                 || cardType == SectionCardFragment.CardType.SENTENCE.ordinal()) {
             clazz = StudyActivity.class;
-            bundle = argument;
         } else if (cardType == SectionCardFragment.CardType.PRACTICE.ordinal()) {
             clazz = ExamActivity.class;
-            bundle = argument;
-        } else { //TEST
-
         }
-        getView().openNewScreenCorresponding(clazz, bundle);
+        getView().openNewScreenCorresponding(clazz, argument);
     }
 }

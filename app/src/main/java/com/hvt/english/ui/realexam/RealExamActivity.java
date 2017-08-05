@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 
 import com.github.channguyen.rsv.RangeSliderView;
 import com.hvt.english.Constant;
+import com.hvt.english.MyApplication;
 import com.hvt.english.R;
 import com.hvt.english.model.Answer;
 import com.hvt.english.model.Question;
@@ -73,7 +74,7 @@ public class RealExamActivity extends BaseActivity implements RealExamContract.V
     @Override
     public void attachView() {
         if (presenter == null) {
-            presenter = new RealExamPresenter(null);
+            presenter = new RealExamPresenter(MyApplication.getApplication().getApiClient());
         }
         presenter.onAttach(this);
     }

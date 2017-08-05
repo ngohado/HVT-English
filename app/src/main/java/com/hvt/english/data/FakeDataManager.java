@@ -6,6 +6,7 @@ import com.hvt.english.model.Question;
 import com.hvt.english.model.Section;
 import com.hvt.english.model.Sentence;
 import com.hvt.english.model.Word;
+import com.hvt.english.network.ApiClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,10 @@ import java.util.List;
 import io.reactivex.Observable;
 
 public class FakeDataManager implements IDataManager {
+
+    public FakeDataManager(ApiClient apiClient) {
+
+    }
 
     @Override
     public Observable<List<Category>> getCategories() {
@@ -85,15 +90,5 @@ public class FakeDataManager implements IDataManager {
         sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
         sentences.add(new Sentence(1, "Hello Sentence", "Cau xin chao", "http://s1.vocaroo.com/media/download_temp/Vocaroo_s1OL9KjjUqGM.mp3", ""));
         return Observable.just(new Section(words, sentences));
-    }
-
-    @Override
-    public Observable<List<Word>> getWordsRemote(int categoryId) {
-        return null;
-    }
-
-    @Override
-    public Observable<List<Sentence>> getSentencesRemote(int categoryId) {
-        return null;
     }
 }

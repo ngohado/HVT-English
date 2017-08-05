@@ -16,10 +16,10 @@ public class Question {
     public Question(int id, String question, Answer answerA, Answer answerB, Answer answerC, Answer answerD) {
         this.id = id;
         this.question = question;
-        answers.set(0, answerA);
-        answers.set(1, answerB);
-        answers.set(2, answerC);
-        answers.set(3, answerD);
+        answers.add(answerA);
+        answers.add(answerB);
+        answers.add(answerC);
+        answers.add(answerD);
     }
 
     public int id;

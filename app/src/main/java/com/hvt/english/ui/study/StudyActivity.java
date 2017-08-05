@@ -92,7 +92,7 @@ public class StudyActivity extends BaseActivity implements StudyContract.View {
 
     @Override
     public void changeCard(int atPosition) {
-        rsvSmall.setCurrentIndex(atPosition);
+        rsvSmall.setCurrentIndex(atPosition - 1);
         vpCards.setCurrentItem(atPosition, true);
     }
 

@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Shader;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -31,7 +32,7 @@ public class RangeSliderView extends View {
 
     private static final float DEFAULT_SLIDER_RADIUS_PERCENT = 0.25f;
 
-    private static final int DEFAULT_RANGE_COUNT = 5;
+    private static final int DEFAULT_RANGE_COUNT = 10;
 
     private static final int DEFAULT_HEIGHT_IN_DP = 50;
 
@@ -49,6 +50,14 @@ public class RangeSliderView extends View {
 
     private float currentSlidingX;
 
+    private float currentSlidingY;
+
+    private float selectedSlotX;
+
+    private float selectedSlotY;
+
+    private boolean gotSlot = false;
+
     private float[] slotPositions;
 
     private int filledColor = DEFAULT_FILLED_COLOR;
@@ -58,6 +67,20 @@ public class RangeSliderView extends View {
     private float barHeightPercent = DEFAULT_BAR_HEIGHT_PERCENT;
 
     private int rangeCount = DEFAULT_RANGE_COUNT;
+
+    private int barHeight;
+
+    private OnSlideListener listener;
+
+    private float rippleRadius = 0.0f;
+
+    private float downX;
+
+    private float downY;
+
+    private Path innerPath = new Path();
+
+    private Path outerPath = new Path();
 
     private float slotRadiusPercent = DEFAULT_SLOT_RADIUS_PERCENT;
 
@@ -127,21 +150,7 @@ public class RangeSliderView extends View {
         ripplePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         ripplePaint.setStrokeWidth(2.0f);
         ripplePaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        currentIndex = 0;
-    }
 
-    private void updateRadius(int height) {
-        radius = height * sliderRadiusPercent;
-        slotRadius = 15;
-    }
-
-
-    public void setRangeCount(int rangeCount) {
-        if (rangeCount < 2) {
-            throw new IllegalArgumentException("rangeCount must be >= 2");
-        }
-        slotPositions = new float[rangeCount];
-        this.rangeCount = rangeCount;
         getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
@@ -157,6 +166,51 @@ public class RangeSliderView extends View {
                 return true;
             }
         });
+        currentIndex = 0;
+    }
+
+    private void updateRadius(int height) {
+        barHeight = 3;
+        radius = height * sliderRadiusPercent;
+        slotRadius = 15;
+    }
+
+
+    public void setRangeCount(int rangeCount) {
+        if (rangeCount < 2) {
+            throw new IllegalArgumentException("rangeCount must be >= 2");
+        }
+        slotPositions = new float[rangeCount];
+        this.rangeCount = rangeCount;
+        int w = getWidthWithPadding() - 30;
+        int h = getHeightWithPadding();
+
+        /** Space between each slot */
+        int spacing = w / rangeCount;
+
+        /** Center vertical */
+        int y = getPaddingTop() + h / 2;
+        currentSlidingY = y;
+        selectedSlotY = y;
+        /**
+         * Try to center it, so start by half
+         * <pre>
+         *
+         *  Example for 4 slots
+         *
+         *  ____o____|____o____|____o____|____o____
+         *  --space--
+         *
+         * </pre>
+         */
+
+        /** Store the position of each slot index */
+        for (int i = 0; i < rangeCount; ++i) {
+            slotPositions[i] = (i + 1) * spacing;
+            if (i == currentIndex) {
+                currentSlidingX = getPaddingLeft() + 30;
+            }
+        }
     }
 
     public int getCurrentIndex() {
@@ -169,7 +223,7 @@ public class RangeSliderView extends View {
         }
         int oldIndex = currentIndex;
         currentIndex = index;
-        ValueAnimator animator = ValueAnimator.ofFloat(slotPositions[oldIndex], slotPositions[currentIndex]);
+        ValueAnimator animator = ValueAnimator.ofFloat(currentSlidingX, slotPositions[currentIndex]);
         animator.setDuration(500);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -206,7 +260,7 @@ public class RangeSliderView extends View {
      * Perform all the calculation before drawing, should only run once
      */
     private void preComputeDrawingPosition() {
-        int w = getWidthWithPadding();
+        int w = getWidthWithPadding() - 30;
         int h = getHeightWithPadding();
 
         /** Space between each slot */
@@ -214,6 +268,8 @@ public class RangeSliderView extends View {
 
         /** Center vertical */
         int y = getPaddingTop() + h / 2;
+        currentSlidingY = y;
+        selectedSlotY = y;
         /**
          * Try to center it, so start by half
          * <pre>
@@ -225,16 +281,23 @@ public class RangeSliderView extends View {
          *
          * </pre>
          */
-        int x = getPaddingLeft() + spacing;
 
         /** Store the position of each slot index */
         for (int i = 0; i < rangeCount; ++i) {
-            slotPositions[i] = x;
-            x += spacing;
+            slotPositions[i] = (i + 1) * spacing;
+            if (i == currentIndex) {
+                currentSlidingX = getPaddingLeft() + 30;
+            }
         }
-        shader = new LinearGradient(slotPositions[0], 0, slotPositions[rangeCount - 1], 0, new int[]{getResources().getColor(R.color.color1),
+        shader = new LinearGradient(getPaddingLeft() + 30, 0, slotPositions[rangeCount - 1], 0, new int[]{getResources().getColor(R.color.color1),
                 getResources().getColor(R.color.color2), getResources().getColor(R.color.color3)}, null, Shader.TileMode.CLAMP);
         paintReal.setShader(shader);
+    }
+
+    public void setInitialIndex(int index) {
+        currentIndex = index;
+        currentSlidingX = selectedSlotX = slotPositions[currentIndex];
+        invalidate();
     }
 
     @Override
@@ -311,25 +374,19 @@ public class RangeSliderView extends View {
         p.setColor(color);
         int h = getHeightWithPadding();
         int y = getPaddingTop() + (h >> 1);
-        canvas.drawLine(from, y, Math.max(to, slotPositions[0] + 1), y, p);
+        canvas.drawLine(from, y, Math.max(to, 35), y, p);
     }
 
 
     @Override
     public void onDraw(Canvas canvas) {
-        int w = getWidthWithPadding();
-        int h = getHeightWithPadding();
-        int spacing = w / rangeCount;
-        int border = (spacing >> 1);
-        int x0 = getPaddingLeft() + border;
-        int y0 = getPaddingTop() + (h >> 1);
         drawEmptySlots(canvas);
 
         /** Draw empty bar */
-        drawBar(canvas, (int) slotPositions[0], (int) slotPositions[rangeCount - 1], emptyColor, paintNormal);
+        drawBar(canvas, getPaddingLeft() + 30, (int) slotPositions[rangeCount - 1], emptyColor, paintNormal);
 
         /** Draw filled bar */
-        drawBar(canvas, x0, (int) currentSlidingX, filledColor, paintReal);
+        drawBar(canvas, getPaddingLeft() + 30, (int) currentSlidingX, filledColor, paintReal);
     }
 
     @Override
@@ -383,6 +440,17 @@ public class RangeSliderView extends View {
     }
 
     /**
+     * Helper method to convert pixel to dp
+     *
+     * @param context
+     * @param px
+     * @return
+     */
+    static int pxToDp(final Context context, final float px) {
+        return (int) (px / context.getResources().getDisplayMetrics().density);
+    }
+
+    /**
      * Helper method to convert dp to pixel
      *
      * @param context
@@ -391,5 +459,18 @@ public class RangeSliderView extends View {
      */
     static int dpToPx(final Context context, final float dp) {
         return (int) (dp * context.getResources().getDisplayMetrics().density);
+    }
+
+    /**
+     * Interface to keep track sliding position
+     */
+    public interface OnSlideListener {
+
+        /**
+         * Notify when slider change to new index position
+         *
+         * @param index The index value of range count [0, rangeCount - 1]
+         */
+        void onSlide(int index);
     }
 }

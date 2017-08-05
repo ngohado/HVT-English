@@ -47,9 +47,9 @@ public class RealExamPresenter extends BasePresenter<RealExamContract.View> impl
 
     @Override
     public void nextQuestion() {
+        getView().updateProgressBar(currentQuestion);
         currentQuestion++;
         if (currentQuestion < questions.size()) {
-            getView().updateProgressBar(currentQuestion);
             getView().showQuestion(questions.get(currentQuestion));
         } else {
             dataManager.savePoints(currentPoint);
