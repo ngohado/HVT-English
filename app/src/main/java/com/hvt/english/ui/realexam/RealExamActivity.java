@@ -28,6 +28,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 
 public class RealExamActivity extends BaseActivity implements RealExamContract.View {
 
@@ -57,6 +58,8 @@ public class RealExamActivity extends BaseActivity implements RealExamContract.V
     Button btnSubmit;
     @BindView(R.id.group_answer)
     RadioGroup radioGroup;
+
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @BindView(R.id.iv_word)
     ImageView ivQuestion;
@@ -121,14 +124,14 @@ public class RealExamActivity extends BaseActivity implements RealExamContract.V
     @Override
     public void showResult(boolean correct) {
         layoutContainer.setBackgroundColor(getResources().getColor(correct ? R.color.exam_color_correct : R.color.exam_color_incorrect));
-        Observable.interval(2, TimeUnit.SECONDS)
+        compositeDisposable.add(Observable.interval(2, TimeUnit.SECONDS)
                 .take(1)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(count -> {
                     layoutContainer.setBackground(defaultColor);
                     radioGroup.clearCheck();
                     presenter.nextQuestion();
-                });
+                }));
     }
 
     @Override
@@ -196,5 +199,11 @@ public class RealExamActivity extends BaseActivity implements RealExamContract.V
                 presenter.submitAnswer(answer);
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        compositeDisposable.clear();
+        super.onDestroy();
     }
 }
