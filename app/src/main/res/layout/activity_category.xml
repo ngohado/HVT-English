@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <FrameLayout
+        <RelativeLayout
             android:id="@+id/toolbar_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,7 +22,15 @@
                 android:layout_height="?attr/actionBarSize"
                 app:titleTextColor="#494c4e" />
 
-        </FrameLayout>
+            <ImageView
+                android:id="@+id/btn_settings"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/settings" />
+        </RelativeLayout>
 
 
     </android.support.design.widget.AppBarLayout>

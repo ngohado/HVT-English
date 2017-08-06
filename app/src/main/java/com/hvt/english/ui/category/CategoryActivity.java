@@ -11,10 +11,12 @@ import com.hvt.english.ui.base.BaseActivity;
 import com.hvt.english.ui.base.OnClickItemListener;
 import com.hvt.english.ui.category.adapter.CategoryAdapter;
 import com.hvt.english.ui.categorydetail.CategoryDetailActivity;
+import com.hvt.english.widget.SettingsDialog;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class CategoryActivity extends BaseActivity implements OnClickItemListener, CategoryContract.View {
 
@@ -69,6 +71,11 @@ public class CategoryActivity extends BaseActivity implements OnClickItemListene
             mPresenter = new CategoryPresenter(MyApplication.getApplication().getApiClient());
         }
         mPresenter.onAttach(this);
+    }
+
+    @OnClick(R.id.btn_settings)
+    public void settingsOnClick() {
+        SettingsDialog.newInstance(this).show();
     }
 
     @Override

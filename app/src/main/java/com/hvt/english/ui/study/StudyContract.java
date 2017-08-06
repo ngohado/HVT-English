@@ -21,6 +21,7 @@ public interface StudyContract {
         void showDialogConfirmExit();
 
         void changeCard(int atPosition);
+
     }
 
     interface Presenter extends IBasePresenter<View> {

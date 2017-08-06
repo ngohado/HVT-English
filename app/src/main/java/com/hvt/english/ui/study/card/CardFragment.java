@@ -35,7 +35,7 @@ public class CardFragment extends BaseFragment implements CardContract.View {
     @BindView(R.id.iv_word)
     ImageView ivWord;
     @BindView(R.id.iv_word_frame)
-    android.support.v7.widget.CardView ivWordFrame;
+    CardView ivWordFrame;
     @BindView(R.id.tv_content)
     CustomFontTextView tvContent;
     @BindView(R.id.tv_meaning)
@@ -116,7 +116,7 @@ public class CardFragment extends BaseFragment implements CardContract.View {
 
     @Override
     public void showImage(boolean show, String url) {
-        ivWord.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
+        ivWordFrame.setVisibility(show ? View.VISIBLE : View.GONE);
         if (show) {
             Glide.with(this).load(url).into(ivWord);
         }

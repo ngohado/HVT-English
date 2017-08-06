@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 
 import com.hvt.english.Constant;
 import com.hvt.english.MyApplication;
+import com.hvt.english.data.DataManager;
 
 /**
  * Created by Hado on 7/19/17.
@@ -61,6 +62,7 @@ public class SharedPrefUtil {
 
     public void setGoals(int newGoals) {
         editor.putInt(Constant.GOALS_SCORE_DATA, newGoals).commit();
+        new DataManager(null).updateGoals(newGoals);
     }
 
 }

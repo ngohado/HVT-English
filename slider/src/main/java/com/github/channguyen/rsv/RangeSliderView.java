@@ -177,9 +177,6 @@ public class RangeSliderView extends View {
 
 
     public void setRangeCount(int rangeCount) {
-        if (rangeCount < 2) {
-            throw new IllegalArgumentException("rangeCount must be >= 2");
-        }
         slotPositions = new float[rangeCount];
         this.rangeCount = rangeCount;
         int w = getWidthWithPadding() - 30;

@@ -1,5 +1,7 @@
 package com.hvt.english.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Hado on 7/18/17.
  */
@@ -15,5 +17,6 @@ public class Answer {
 
     public String content;
 
+    @SerializedName("correct")
     public boolean isCorrect;
 }

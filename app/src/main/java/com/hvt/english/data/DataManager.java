@@ -76,6 +76,16 @@ public class DataManager implements IDataManager {
         return streakDays;
     }
 
+    public void updateGoals(int newGoals) {
+        StreakTable streakToday = new Select().from(StreakTable.class).where("day = ?", TimeUtil.generateStringTime()).executeSingle();
+        if (streakToday == null) {
+            createToday();
+        } else {
+            streakToday.goals = newGoals;
+            streakToday.save();
+        }
+    }
+
     private void createToday() {
         StreakTable streakToday = new Select().from(StreakTable.class).where("day = ?", TimeUtil.generateStringTime()).executeSingle();
         if (streakToday == null) {
