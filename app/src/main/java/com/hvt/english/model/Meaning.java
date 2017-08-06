@@ -20,7 +20,7 @@ public class Meaning implements Parcelable {
     @SerializedName("meaning")
     public String meaning;
 
-    @SerializedName("audio_")
+    @SerializedName("audio_url")
     public String audio;
 
     public boolean correct = false;
