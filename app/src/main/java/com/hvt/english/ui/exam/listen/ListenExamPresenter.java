@@ -40,10 +40,9 @@ public class ListenExamPresenter extends BasePresenter<ListenExamContract.View> 
 
     @Override
     public void submitAnswer(String answer) {
-        boolean correct = question.content.equalsIgnoreCase(answer);
+        boolean correct = question.content.trim().equalsIgnoreCase(answer.trim());
         getView().showResult(correct);
         getView().updateMainView(question, correct);
-
     }
 
     @Override
