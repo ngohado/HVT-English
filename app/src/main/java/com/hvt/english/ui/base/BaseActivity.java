@@ -2,6 +2,7 @@ package com.hvt.english.ui.base;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -14,20 +15,24 @@ import android.widget.Toast;
 import com.hvt.english.util.DialogUtils;
 import com.hvt.english.util.LocaleHelper;
 
+import java.util.Locale;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public abstract class BaseActivity extends AppCompatActivity implements BaseView {
+public abstract class BaseActivity extends AppCompatActivity implements BaseView, TextToSpeech.OnInitListener {
 
     private Unbinder mUnBinder;
     private SweetAlertDialog dialogLoading;
+    private TextToSpeech textToSpeech;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutID());
         mUnBinder = ButterKnife.bind(this);
+        textToSpeech = new TextToSpeech(this, this);
         initView();
         initData();
     }
@@ -52,6 +57,33 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }
         detachView();
         super.onDestroy();
+    }
+
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            int result = textToSpeech.setLanguage(Locale.US);
+
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                initTextToSpeech(false);
+                showToast("Your device isn't supported play audio");
+            } else {
+                initTextToSpeech(true);
+            }
+
+        } else {
+            initTextToSpeech(false);
+            showToast("Your device isn't supported play audio");
+        }
+    }
+
+    public void speakOut(String text) {
+        textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+    }
+
+    protected void initTextToSpeech(boolean success) {
+
     }
 
     @Override

@@ -10,11 +10,11 @@ import android.widget.RelativeLayout;
 import com.hvt.english.MyApplication;
 import com.hvt.english.R;
 import com.hvt.english.model.Meaning;
+import com.hvt.english.ui.base.BaseActivity;
 import com.hvt.english.ui.base.BaseFragment;
 import com.hvt.english.ui.exam.ContinueQuestionListener;
 import com.hvt.english.ui.exam.main.ExamActivity;
 import com.hvt.english.util.DialogUtils;
-import com.hvt.english.util.SoundUtils;
 import com.hvt.english.widget.CustomFontButton;
 import com.hvt.english.widget.CustomFontEditText;
 import com.hvt.english.widget.CustomFontTextView;
@@ -111,7 +111,7 @@ public class ListenExamFragment extends BaseFragment implements ListenExamContra
 
     @Override
     public void showPlaySound(boolean show) {
-        ivSound.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
+//        ivSound.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
@@ -127,9 +127,11 @@ public class ListenExamFragment extends BaseFragment implements ListenExamContra
     }
 
     @Override
-    public void playSound(String url) {
-        SoundUtils.playSound(getContext(), url, () -> ivSound.setEnabled(true));
+    public void playSound(String text) {
+//        SoundUtils.playSound(getContext(), url, () -> ivSound.setEnabled(true));
+        ((BaseActivity) getActivity()).speakOut(text);
     }
+
 
     @OnTouch(R.id.iv_idea)
     public boolean buttonIdeaOnTouch(View view, MotionEvent motionEvent) {
@@ -148,7 +150,7 @@ public class ListenExamFragment extends BaseFragment implements ListenExamContra
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_sound:
-                ivSound.setEnabled(false);
+//                ivSound.setEnabled(false);
                 presenter.clickSound();
                 break;
             case R.id.btn_submit:

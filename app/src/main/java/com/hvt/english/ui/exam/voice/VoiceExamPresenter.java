@@ -52,7 +52,7 @@ public class VoiceExamPresenter extends BasePresenter<VoiceExamContract.View> im
 
     @Override
     public void clickSound() {
-        getView().playSound(question.audio);
+        getView().playSound(question.content);
     }
 
     @Override

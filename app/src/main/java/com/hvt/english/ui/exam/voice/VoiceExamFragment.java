@@ -14,10 +14,10 @@ import android.widget.Toast;
 import com.hvt.english.MyApplication;
 import com.hvt.english.R;
 import com.hvt.english.model.Meaning;
+import com.hvt.english.ui.base.BaseActivity;
 import com.hvt.english.ui.base.BaseFragment;
 import com.hvt.english.ui.exam.ContinueQuestionListener;
 import com.hvt.english.ui.exam.main.ExamActivity;
-import com.hvt.english.util.SoundUtils;
 import com.hvt.english.widget.CustomFontTextView;
 
 import java.util.ArrayList;
@@ -118,7 +118,7 @@ public class VoiceExamFragment extends BaseFragment implements VoiceExamContract
 
     @Override
     public void showPlaySound(boolean show) {
-        ivSound.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
+//        ivSound.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
@@ -154,8 +154,10 @@ public class VoiceExamFragment extends BaseFragment implements VoiceExamContract
     }
 
     @Override
-    public void playSound(String url) {
-        SoundUtils.playSound(getContext(), url, () -> ivSound.setEnabled(true));
+    public void playSound(String text) {
+//        SoundUtils.playSound(getContext(), url, () -> ivSound.setEnabled(true));
+        ((BaseActivity) getActivity()).speakOut(text);
+
     }
 
     @OnTouch(R.id.iv_idea)
@@ -175,7 +177,7 @@ public class VoiceExamFragment extends BaseFragment implements VoiceExamContract
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_sound:
-                ivSound.setEnabled(false);
+//                ivSound.setEnabled(false);
                 presenter.clickSound();
                 break;
             case R.id.btn_speech:
