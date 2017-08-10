@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">English</string>
+    <string name="hvt_app_name">Study English</string>
     <string name="categories_error_load" />
     <string name="streak_button_continue">Continue</string>
     <string name="streak_title_practice_complete">Practice Complete!</string>
