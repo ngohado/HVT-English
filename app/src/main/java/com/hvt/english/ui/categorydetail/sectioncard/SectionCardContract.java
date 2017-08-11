@@ -23,6 +23,8 @@ public interface SectionCardContract {
         void showContent(String content);
 
         void openNewScreenCorresponding(Class clazz, Bundle bundle);
+
+        void showEmptyData();
     }
 
     interface Presenter extends IBasePresenter<View> {
