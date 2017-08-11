@@ -3,6 +3,7 @@ package com.hvt.english.ui.categorydetail.sectioncard;
 
 import android.os.Bundle;
 
+import com.hvt.english.model.Meaning;
 import com.hvt.english.model.Sentence;
 import com.hvt.english.model.Word;
 import com.hvt.english.network.ApiClient;
@@ -14,6 +15,7 @@ import com.hvt.english.util.font.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.hvt.english.ui.categorydetail.sectioncard.SectionCardFragment.CARD_SECTION_DATA;
 import static com.hvt.english.ui.categorydetail.sectioncard.SectionCardFragment.CARD_TYPE_DATA;
 
 /**
@@ -29,8 +31,11 @@ public class SectionCardPresenter extends BasePresenter<SectionCardContract.View
         super(apiClient);
     }
 
+    boolean isEmptyData = true;
+
     @Override
     public void loadWord(ArrayList<Word> words) {
+        if (words != null && !words.isEmpty()) isEmptyData = false;
         this.words.clear();
         this.words.addAll(words);
         getView().showTitle("New words");
@@ -40,6 +45,7 @@ public class SectionCardPresenter extends BasePresenter<SectionCardContract.View
 
     @Override
     public void loadSentence(ArrayList<Sentence> sentences) {
+        if (sentences != null && !sentences.isEmpty()) isEmptyData = false;
         this.sentences.clear();
         this.sentences.addAll(sentences);
         getView().showTitle("New sentences");
@@ -63,6 +69,10 @@ public class SectionCardPresenter extends BasePresenter<SectionCardContract.View
 
     @Override
     public void clickStart(Bundle argument) {
+        if (isEmptyData) {
+            getView().showEmptyData();
+            return;
+        }
         int cardType = argument.getInt(CARD_TYPE_DATA);
 
         Class clazz = null;
@@ -71,6 +81,11 @@ public class SectionCardPresenter extends BasePresenter<SectionCardContract.View
                 || cardType == SectionCardFragment.CardType.SENTENCE.ordinal()) {
             clazz = StudyActivity.class;
         } else if (cardType == SectionCardFragment.CardType.PRACTICE.ordinal()) {
+            ArrayList<Meaning> data = argument.getParcelableArrayList(CARD_SECTION_DATA);
+            if (data == null || data.isEmpty()) {
+                getView().showEmptyData();
+                return;
+            }
             clazz = ExamActivity.class;
         }
         getView().openNewScreenCorresponding(clazz, argument);

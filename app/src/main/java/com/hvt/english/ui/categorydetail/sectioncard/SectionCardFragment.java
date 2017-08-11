@@ -2,6 +2,7 @@ package com.hvt.english.ui.categorydetail.sectioncard;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 
@@ -141,6 +142,15 @@ public class SectionCardFragment extends BaseFragment implements SectionCardCont
         Intent intent = new Intent(getContext(), clazz);
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    @Override
+    public void showEmptyData() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Empty data")
+                .setMessage("This section is empty data, please select other section!")
+                .setPositiveButton("Ok", null)
+                .show();
     }
 
 
