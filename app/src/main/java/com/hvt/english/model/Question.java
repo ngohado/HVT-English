@@ -24,7 +24,7 @@ public class Question {
 
     public int id;
 
-    @SerializedName("background_url")
+    @SerializedName("picture_url")
     public String image;
 
     @SerializedName("content")
