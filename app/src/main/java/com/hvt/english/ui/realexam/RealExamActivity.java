@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
 import com.github.channguyen.rsv.RangeSliderView;
 import com.hvt.english.Constant;
 import com.hvt.english.MyApplication;
@@ -106,6 +107,9 @@ public class RealExamActivity extends BaseActivity implements RealExamContract.V
     @Override
     public void showQuestion(Question question) {
         btnSubmit.setEnabled(true);
+
+        Glide.with(this).load(question.image).into(ivQuestion);
+
         StringUtils.setText(tvQuestion, question.question);
 
         rdbAnswerA.setTag(question.getAnswerA());
