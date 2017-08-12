@@ -69,16 +69,16 @@ public class SectionCardPresenter extends BasePresenter<SectionCardContract.View
 
     @Override
     public void clickStart(Bundle argument) {
-        if (isEmptyData) {
-            getView().showEmptyData();
-            return;
-        }
         int cardType = argument.getInt(CARD_TYPE_DATA);
 
         Class clazz = null;
 
         if (cardType == SectionCardFragment.CardType.WORD.ordinal()
                 || cardType == SectionCardFragment.CardType.SENTENCE.ordinal()) {
+            if (isEmptyData) {
+                getView().showEmptyData();
+                return;
+            }
             clazz = StudyActivity.class;
         } else if (cardType == SectionCardFragment.CardType.PRACTICE.ordinal()) {
             ArrayList<Meaning> data = argument.getParcelableArrayList(CARD_SECTION_DATA);
